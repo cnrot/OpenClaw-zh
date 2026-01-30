@@ -10,7 +10,8 @@
   "modules": {
     "cli": [
       "cli/banner.json",
-      "cli/tagline.json"
+      "cli/tagline.json",
+      "cli/help.json"
     ],
     "wizard": [
       "wizard/onboarding.json",
@@ -18,7 +19,9 @@
     ],
     "commands": [
       "commands/auth-choice.json",
-      "commands/helpers.json"
+      "commands/helpers.json",
+      "commands/doctor.json",
+      "commands/doctor-security.json"
     ]
   }
 }
