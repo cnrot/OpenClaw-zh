@@ -11,6 +11,32 @@
 #
 # ============================================================
 
+FROM node:22-slim AS builder
+
+# 安装构建依赖
+RUN apt-get update && apt-get install -y \
+    git \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安装 pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制源代码
+COPY . .
+
+# 安装依赖并构建
+RUN pnpm install --frozen-lockfile || pnpm install
+RUN pnpm run build
+
+# ============================================================
+# 运行时镜像
+# ============================================================
 FROM node:22-slim
 
 LABEL org.opencontainers.image.source="https://github.com/1186258278/OpenClawChineseTranslation"
@@ -18,7 +44,7 @@ LABEL org.opencontainers.image.description="OpenClaw 汉化发行版 - 开源个
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL maintainer="武汉晴辰天下网络科技有限公司 <contact@qingchencloud.com>"
 
-# 安装必要的依赖
+# 安装运行时依赖
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -34,11 +60,14 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 # 设置工作目录
 WORKDIR /app
 
-# 复制构建好的代码
-COPY . .
+# 从构建阶段复制构建产物
+COPY --from=builder /app/package.json /app/
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=builder /app/openclaw.mjs /app/
 
-# 安装依赖并全局链接
-RUN npm install -g . || npm link
+# 全局链接
+RUN npm link
 
 # 创建配置目录
 RUN mkdir -p /root/.openclaw
