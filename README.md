@@ -14,7 +14,7 @@
 
 | 特性 | 说明 |
 |:---:|:---|
-| ⏰ **每小时同步** | CI/CD 自动从上游 [openclaw](https://github.com/anthropics/claude-code) 拉取最新代码 |
+| ⏰ **每小时同步** | CI/CD 自动从上游 [OpenClaw](https://github.com/openclaw/openclaw) 拉取最新代码 |
 | 🚀 **自动构建发布** | 同步后立即构建 npm 包 + Docker 镜像，无需等待 |
 | 📦 **双版本可选** | `nightly`（最新功能）/ `stable`（稳定版） |
 
@@ -157,8 +157,8 @@ npm install -g @qingchencloud/openclaw-zh@nightly
 docker run -d \
   --name openclaw \
   -p 18789:18789 \
-  -v openclaw-data:/home/node/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest
+  -v openclaw-data:/root/.openclaw \
+  ghcr.io/1186258278/openclaw-zh:nightly
 
 # 访问 Dashboard
 # http://localhost:18789
@@ -308,14 +308,14 @@ irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docke
 docker run -d \
   --name openclaw \
   -p 18789:18789 \
-  ghcr.io/1186258278/openclaw-zh:latest
+  ghcr.io/1186258278/openclaw-zh:nightly
 
 # 带数据持久化（推荐）
 docker run -d \
   --name openclaw \
   -p 18789:18789 \
   -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest
+  ghcr.io/1186258278/openclaw-zh:nightly
 ```
 
 访问：`http://localhost:18789`
@@ -332,17 +332,17 @@ docker volume create openclaw-data
 
 # 2. 初始化配置
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw setup
+  ghcr.io/1186258278/openclaw-zh:nightly openclaw setup
 
 # 3. 配置远程访问参数
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw config set gateway.mode local
+  ghcr.io/1186258278/openclaw-zh:nightly openclaw config set gateway.mode local
 
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw config set gateway.bind lan
+  ghcr.io/1186258278/openclaw-zh:nightly openclaw config set gateway.bind lan
 
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw config set gateway.controlUi.allowInsecureAuth true
+  ghcr.io/1186258278/openclaw-zh:nightly openclaw config set gateway.controlUi.allowInsecureAuth true
 
 # 4. 启动容器
 docker run -d \
@@ -351,7 +351,7 @@ docker run -d \
   -v openclaw-data:/root/.openclaw \
   -e OPENCLAW_GATEWAY_TOKEN=your-secure-token \
   --restart unless-stopped \
-  ghcr.io/1186258278/openclaw-zh:latest \
+  ghcr.io/1186258278/openclaw-zh:nightly \
   openclaw gateway run
 ```
 
@@ -385,7 +385,7 @@ docker-compose up -d
 version: '3.8'
 services:
   openclaw:
-    image: ghcr.io/1186258278/openclaw-zh:latest
+    image: ghcr.io/1186258278/openclaw-zh:nightly
     container_name: openclaw
     ports:
       - "18789:18789"
