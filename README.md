@@ -33,17 +33,19 @@
 
 ---
 
+<a id="nav"></a>
 ## 📑 快速导航
 
 | 🚀 快速上手 | 📦 部署方式 | 🔧 使用维护 | 💡 帮助 |
 |:---:|:---:|:---:|:---:|
-| [什么是 OpenClaw](#-什么是-openclaw) | [一键安装](#-一键安装汉化版) | [快速开始](#-快速开始) | [常见问题](#-常见问题) |
-| [汉化效果预览](#-汉化效果预览) | [npm 安装](#方式-1-npm-安装) | [更新升级](#-更新升级) | [参与贡献](#-参与贡献) |
-| [汉化内容](#-汉化内容) | [Docker 部署](#-docker-部署指南) | [手动汉化安装](#-手动汉化安装) | [关于我们](#-关于我们) |
+| [什么是 OpenClaw](#intro) | [一键安装](#install) | [快速开始](#start) | [常见问题](#faq) |
+| [汉化效果预览](#preview) | [npm 安装](#npm) | [更新升级](#upgrade) | [参与贡献](#contribute) |
+| [汉化内容](#content) | [Docker 部署](#docker) | [手动汉化安装](#manual) | [关于我们](#about) |
 
 ---
 
-## 🦞 什么是 OpenClaw？ <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="intro"></a>
+## 🦞 什么是 OpenClaw？ <sub>[↑ 返回目录](#nav)</sub>
 
 [OpenClaw](https://openclaw.ai/) 是由 Peter Steinberger ([@steipete](https://twitter.com/steipete)) 创建的**开源个人 AI 助手平台**，在 GitHub 上拥有超过 **100,000+ Stars**。
 
@@ -71,7 +73,8 @@
 
 ---
 
-## 📸 汉化效果预览 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="preview"></a>
+## 📸 汉化效果预览 <sub>[↑ 返回目录](#nav)</sub>
 
 <p align="center">
   <img src="docs/image/5.png" alt="概览仪表板" width="100%">
@@ -116,7 +119,8 @@
 
 ---
 
-## ⚡ 一键安装汉化版 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="install"></a>
+## ⚡ 一键安装汉化版 <sub>[↑ 返回目录](#nav)</sub>
 
 ### Windows (PowerShell)
 
@@ -146,7 +150,8 @@ curl -fsSL -o install.sh https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseT
 
 ---
 
-## 📦 其他安装方式 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="npm"></a>
+## 📦 其他安装方式 <sub>[↑ 返回目录](#nav)</sub>
 
 ### 版本选择
 
@@ -189,7 +194,8 @@ docker run -d --name openclaw -p 18789:18789 -v openclaw-data:/root/.openclaw \
 
 ---
 
-## 🚀 快速开始 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="start"></a>
+## 🚀 快速开始 <sub>[↑ 返回目录](#nav)</sub>
 
 安装完成后：
 
@@ -222,7 +228,8 @@ openclaw --help             # 查看帮助
 
 ---
 
-## 🔄 更新升级 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="upgrade"></a>
+## 🔄 更新升级 <sub>[↑ 返回目录](#nav)</sub>
 
 已安装的 OpenClaw 汉化版如何升级？根据你的安装方式选择对应方法：
 
@@ -289,7 +296,8 @@ npm install -g @qingchencloud/openclaw-zh@latest
 
 ---
 
-## ✨ 汉化内容 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="content"></a>
+## ✨ 汉化内容 <sub>[↑ 返回目录](#nav)</sub>
 
 我们提供了**深度汉化**，覆盖 **CLI 命令行** + **Dashboard 网页控制台** 两大核心界面。
 
@@ -366,7 +374,8 @@ npm install -g @qingchencloud/openclaw-zh@latest
 
 ---
 
-## 🔄 自动同步更新 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="sync"></a>
+## 🔄 自动同步更新 <sub>[↑ 返回目录](#nav)</sub>
 
 - **每小时** 检测 OpenClaw 官方仓库更新
 - **自动** 应用汉化、构建、测试
@@ -376,7 +385,8 @@ npm install -g @qingchencloud/openclaw-zh@latest
 
 ---
 
-## 🐳 Docker 部署指南 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="docker"></a>
+## 🐳 Docker 部署指南 <sub>[↑ 返回目录](#nav)</sub>
 
 ### 方式 1：一键部署脚本（推荐）
 
@@ -561,7 +571,8 @@ docker run --rm -v openclaw-data:/root/.openclaw alpine cat /root/.openclaw/open
 
 ---
 
-## 🔧 手动汉化安装 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="manual"></a>
+## 🔧 手动汉化安装 <sub>[↑ 返回目录](#nav)</sub>
 
 适用于想要自定义翻译、测试最新代码或参与贡献的用户。
 
@@ -636,7 +647,8 @@ openclaw --help
 
 ---
 
-## 🛠️ 开发者 / 贡献者指南 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="dev"></a>
+## 🛠️ 开发者 / 贡献者指南 <sub>[↑ 返回目录](#nav)</sub>
 
 如果你想参与翻译或本地开发：
 
@@ -709,7 +721,8 @@ OpenClawChineseTranslation/
 
 ---
 
-## ❓ 常见问题 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="faq"></a>
+## ❓ 常见问题 <sub>[↑ 返回目录](#nav)</sub>
 
 ### Q: 安装后运行还是英文？
 
@@ -927,7 +940,8 @@ openclaw gateway restart
 
 ---
 
-## 🔗 相关链接 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="links"></a>
+## 🔗 相关链接 <sub>[↑ 返回目录](#nav)</sub>
 
 ### 汉化版入口
 
@@ -949,7 +963,8 @@ openclaw gateway restart
 
 ---
 
-## 🤝 参与贡献 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="contribute"></a>
+## 🤝 参与贡献 <sub>[↑ 返回目录](#nav)</sub>
 
 我们欢迎各种形式的贡献：
 
@@ -960,7 +975,8 @@ openclaw gateway restart
 
 ---
 
-## 📜 许可证 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="license"></a>
+## 📜 许可证 <sub>[↑ 返回目录](#nav)</sub>
 
 本项目基于 [MIT License](LICENSE) 开源。
 
@@ -968,7 +984,8 @@ OpenClaw 原项目由 [Peter Steinberger](https://twitter.com/steipete) 创建�
 
 ---
 
-## 🏢 关于我们 <sub>[↑ 返回目录](#-快速导航)</sub>
+<a id="about"></a>
+## 🏢 关于我们 <sub>[↑ 返回目录](#nav)</sub>
 
 **武汉晴辰天下网络科技有限公司** 出品
 
