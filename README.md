@@ -127,12 +127,55 @@ npm update -g @qingchencloud/openclaw-zh
 
 ---
 
+## Docker 部署（国内推荐）
+
+> **国内用户强烈推荐使用 Docker Hub 镜像**，拉取速度快，无需翻墙！
+
+| 镜像源 | 拉取命令 | 适用 |
+|--------|----------|------|
+| **Docker Hub（国内推荐）** | `docker pull 1186258278/openclaw-zh:latest` | 国内用户 |
+| GitHub Container Registry | `docker pull ghcr.io/1186258278/openclaw-zh:latest` | 海外用户 |
+
+### 一键部署（最简单）
+
+```bash
+# Linux/macOS — 加 --china 自动使用国内镜像
+curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash -s -- --china
+```
+
+```powershell
+# Windows PowerShell — 加 -China 自动使用国内镜像
+irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.ps1 | iex
+# 或: .\docker-deploy.ps1 -China
+```
+
+### 手动 Docker 部署
+
+```bash
+# 国内用户使用 Docker Hub 镜像
+IMAGE=1186258278/openclaw-zh:latest
+# 海外用户使用: IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+
+# 1. 初始化
+docker run --rm -v openclaw-data:/root/.openclaw $IMAGE openclaw setup
+docker run --rm -v openclaw-data:/root/.openclaw $IMAGE openclaw config set gateway.mode local
+
+# 2. 启动
+docker run -d --name openclaw -p 18789:18789 \
+  -v openclaw-data:/root/.openclaw --restart unless-stopped \
+  $IMAGE openclaw gateway run
+```
+
+访问：`http://localhost:18789`
+
+> 完整指南（远程部署、Nginx 反代、Docker Compose、内网访问等）请查看 **[Docker 部署指南](docs/DOCKER_GUIDE.md)**
+
+---
+
 ## 其他安装方式
 
-> 完整的手动安装教程（含 Node.js 安装、各系统配置、守护进程管理）请查看 **[详细安装指南](docs/INSTALL_GUIDE.md)**
-
 <details>
-<summary><b>一键安装脚本</b></summary>
+<summary><b>一键安装脚本（npm）</b></summary>
 
 **Linux / macOS：**
 ```bash
@@ -150,40 +193,16 @@ Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTr
 </details>
 
 <details>
-<summary><b>Docker 部署</b></summary>
+<summary><b>npm 国内加速安装</b></summary>
 
-**快速启动：**
 ```bash
-# 镜像地址（国内用户推荐 Docker Hub 加速）
-# 海外: ghcr.io/1186258278/openclaw-zh:latest
-# 国内: 1186258278/openclaw-zh:latest
-IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+# 使用 npmmirror 镜像源（国内推荐）
+npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
 
-# 初始化配置
-docker run --rm -v openclaw-data:/root/.openclaw \
-  $IMAGE openclaw setup
-
-docker run --rm -v openclaw-data:/root/.openclaw \
-  $IMAGE openclaw config set gateway.mode local
-
-# 启动容器
-docker run -d --name openclaw -p 18789:18789 \
-  -v openclaw-data:/root/.openclaw \
-  $IMAGE openclaw gateway run
+# 或全局设置镜像源后再安装
+npm config set registry https://registry.npmmirror.com
+npm install -g @qingchencloud/openclaw-zh@latest
 ```
-
-访问：`http://localhost:18789`
-
-**一键部署脚本（推荐）：**
-```bash
-# Linux/macOS（国内用户加 --china 参数加速）
-curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash -s -- --china
-
-# Windows PowerShell
-irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.ps1 | iex
-```
-
-> 完整 Docker 指南（远程部署、Nginx 反代、Docker Compose 等）请查看 **[Docker 部署指南](docs/DOCKER_GUIDE.md)**
 
 </details>
 
@@ -197,41 +216,6 @@ pnpm add -g @qingchencloud/openclaw-zh@latest
 # yarn
 yarn global add @qingchencloud/openclaw-zh@latest
 ```
-
-</details>
-
----
-
-## 国内加速
-
-> 如果你在中国大陆，下载可能较慢，以下方案可以显著提速。
-
-<details>
-<summary><b>npm 安装加速</b></summary>
-
-```bash
-# 使用 npmmirror 镜像源（推荐）
-npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
-
-# 或全局设置镜像源
-npm config set registry https://registry.npmmirror.com
-npm install -g @qingchencloud/openclaw-zh@latest
-```
-
-</details>
-
-<details>
-<summary><b>Docker 拉取加速</b></summary>
-
-```bash
-# Docker Hub 镜像（国内速度更快）
-docker pull 1186258278/openclaw-zh:latest
-
-# GitHub Container Registry（默认）
-docker pull ghcr.io/1186258278/openclaw-zh:latest
-```
-
-> 如果 Docker Hub 也较慢，可以配置 Docker 镜像加速器（阿里云、DaoCloud 等）。
 
 </details>
 
@@ -252,18 +236,81 @@ npx @qingchencloud/openclaw-zh@latest
 
 ## 常见问题
 
-| 问题 | 快速解决 | 详细说明 |
-|------|----------|----------|
-| **安装卡住 / 下载慢** | 加镜像源：`npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com` | [查看](docs/FAQ.md#安装卡住不动--下载很慢) |
-| **安装后还是英文** | 先卸载原版：`npm uninstall -g openclaw && npm install -g @qingchencloud/openclaw-zh@latest` | [查看](docs/FAQ.md#安装后运行还是英文) |
-| **`token mismatch`** | 运行 `openclaw dashboard` 自动打开带 Token 的 URL | [查看](docs/FAQ.md#gateway-token-mismatch--unauthorized) |
-| **`pairing required`** | `openclaw devices list` 然后 `openclaw devices approve <ID>` | [查看](docs/FAQ.md#pairing-required--设备配对) |
-| **远程 / 内网访问不了** | `openclaw config set gateway.bind lan` + 设置 Token + 重启 | [查看](docs/FAQ.md#npm-安装后内网其他电脑无法访问) |
-| **`Missing config`** | 运行 `openclaw onboard` 初始化 | [查看](docs/FAQ.md#missing-config-run-openclaw-setup) |
-| **`Missing workspace template`** | `2026.2.4-zh.1` 及更早版本的已知 Bug，升级即可修复：`npm install -g @qingchencloud/openclaw-zh@latest` | [查看](docs/FAQ.md#missing-workspace-template-agentsmd) |
-| **Ollama 无响应** | 检查 baseURL 配置是否为 `http://localhost:11434/v1` | [查看](docs/FAQ.md#本地-ollama-模型调用无响应) |
+### 🔥 Top 3 高频问题
 
-> **[完整排查手册 (25+ 个问题)](docs/FAQ.md)** | [Docker 问题排查](docs/DOCKER_GUIDE.md#常见错误排查)
+<details open>
+<summary><b>❶ 安装卡住 / 下载慢</b></summary>
+
+**原因**：npm 默认从国外源下载，国内网络可能很慢。
+
+**解决**：加 `--registry` 参数使用国内镜像源，或直接用 Docker 部署：
+```bash
+# 方案 1：npm 加镜像源
+npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
+
+# 方案 2：用 Docker（国内最快）
+docker pull 1186258278/openclaw-zh:latest
+```
+
+> [详细说明 →](docs/FAQ.md#安装卡住不动--下载很慢)
+
+</details>
+
+<details open>
+<summary><b>❷ 安装后还是英文界面</b></summary>
+
+**原因**：系统上还残留了英文原版 `openclaw`，它的优先级高于汉化版。
+
+**解决**：先卸载原版，再重装汉化版：
+```bash
+npm uninstall -g openclaw
+npm install -g @qingchencloud/openclaw-zh@latest
+```
+
+验证：`openclaw --version` 输出应包含 `-zh` 后缀。
+
+> [详细说明 →](docs/FAQ.md#安装后运行还是英文)
+
+</details>
+
+<details open>
+<summary><b>❸ 打开 Dashboard 报 `pairing required` 或 `token mismatch`</b></summary>
+
+**原因**：OpenClaw 的安全机制要求设备配对或 Token 验证。
+
+**解决**：
+
+```bash
+# token mismatch —— 用 dashboard 命令自动带 Token 打开：
+openclaw dashboard
+
+# pairing required —— 批准设备：
+openclaw devices list           # 查看待批准设备 ID
+openclaw devices approve <ID>   # 批准该设备
+
+# Docker 用户如果无法运行 CLI，可以一键关闭设备认证：
+docker run --rm -v openclaw-data:/root/.openclaw \
+  1186258278/openclaw-zh:latest \
+  openclaw config set gateway.controlUi.dangerouslyDisableDeviceAuth true
+# 然后重启容器
+```
+
+> [token mismatch 详细说明 →](docs/FAQ.md#gateway-token-mismatch--unauthorized) | [pairing required 详细说明 →](docs/FAQ.md#pairing-required--设备配对)
+
+</details>
+
+### 其他常见问题
+
+| 问题 | 快速解决 | 详情 |
+|------|----------|------|
+| **远程 / 内网访问不了** | `openclaw config set gateway.bind lan` 然后重启 | [查看 →](docs/FAQ.md#npm-安装后内网其他电脑无法访问) |
+| **`Missing config`** | 运行 `openclaw onboard` 初始化配置 | [查看 →](docs/FAQ.md#missing-config-run-openclaw-setup) |
+| **`Missing workspace template`** | 升级到最新版即可：`npm install -g @qingchencloud/openclaw-zh@latest` | [查看 →](docs/FAQ.md#missing-workspace-template-agentsmd) |
+| **Ollama 无响应** | 检查 baseURL 是否为 `http://localhost:11434/v1` | [查看 →](docs/FAQ.md#本地-ollama-模型调用无响应) |
+| **Docker 容器启动后退出** | 确保启动命令包含 `openclaw gateway run` | [查看 →](docs/DOCKER_GUIDE.md#常见错误排查) |
+| **Docker 打不开 Dashboard** | 设置 `gateway.bind lan` 监听所有网卡 | [查看 →](docs/DOCKER_GUIDE.md#常见错误排查) |
+
+> **[完整排查手册 (25+ 个问题)](docs/FAQ.md)** | **[Docker 问题排查](docs/DOCKER_GUIDE.md#常见错误排查)**
 
 ---
 
