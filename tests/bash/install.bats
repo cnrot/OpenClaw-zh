@@ -249,7 +249,10 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
     
     run run_setup_if_needed
     [ "$status" -eq 0 ]
-    [[ "$output" == *"OPENCLAW_SKIP_SETUP"* ]]
+    # 剥离 ANSI 转义码后匹配，避免颜色码干扰
+    local clean_output
+    clean_output=$(echo "$output" | sed 's/\x1b\[[0-9;]*m//g')
+    [[ "$clean_output" == *"OPENCLAW_SKIP_SETUP"* ]]
     
     unset OPENCLAW_SKIP_SETUP
 }
