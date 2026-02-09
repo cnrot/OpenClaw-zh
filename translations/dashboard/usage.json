@@ -1,0 +1,146 @@
+{
+  "file": "ui/src/ui/views/usage.ts",
+  "description": "Dashboard 用量统计页面 (Token Usage Dashboard)",
+  "replacements": {
+    "<div class=\"usage-page-title\">Usage</div>": "<div class=\"usage-page-title\">用量统计</div>",
+    "See where tokens go, when sessions spike, and what drives cost.": "查看令牌去向、会话峰值时间以及成本驱动因素。",
+
+    "${props.loading ? \"Loading\" : \"Refresh\"}": "${props.loading ? \"加载中\" : \"刷新\"}",
+    "Export ▾": "导出 ▾",
+    "${props.headerPinned ? \"Pinned\" : \"Pin\"}": "${props.headerPinned ? \"已固定\" : \"固定\"}",
+    "title=${props.headerPinned ? \"Unpin filters\" : \"Pin filters\"}": "title=${props.headerPinned ? \"取消固定筛选器\" : \"固定筛选器\"}",
+
+    "placeholder=\"Filter sessions (e.g. key:agent:main:cron* model:gpt-4o has:errors minTokens:2000)\"": "placeholder=\"筛选会话（例如：key:agent:main:cron* model:gpt-4o has:errors minTokens:2000）\"",
+    "placeholder=\"Search conversation\"": "placeholder=\"搜索对话\"",
+
+    "title=\"Start Date\"": "title=\"开始日期\"",
+    "title=\"End Date\"": "title=\"结束日期\"",
+    "title=\"Time zone\"": "title=\"时区\"",
+
+    "{ label: \"Today\", days: 1 }": "{ label: \"今天\", days: 1 }",
+    "{ label: \"7d\", days: 7 }": "{ label: \"7天\", days: 7 }",
+    "{ label: \"30d\", days: 30 }": "{ label: \"30天\", days: 30 }",
+
+    "<div class=\"card-title\">Daily ${isTokenMode ? \"Token\" : \"Cost\"} Usage</div>": "<div class=\"card-title\">每日${isTokenMode ? \"令牌\" : \"成本\"}使用量</div>",
+    "\"Usage Over Time\"": "\"随时间的使用情况\"",
+
+    "<div class=\"cost-breakdown-header\">${isTokenMode ? \"Tokens\" : \"Cost\"} by Type</div>": "<div class=\"cost-breakdown-header\">${isTokenMode ? \"令牌\" : \"成本\"}按类型</div>",
+    "title=\"Output: ${isTokenMode ? formatTokens(totals.output) : formatCost(breakdown.output.cost)}\"": "title=\"输出: ${isTokenMode ? formatTokens(totals.output) : formatCost(breakdown.output.cost)}\"",
+    "title=\"Input: ${isTokenMode ? formatTokens(totals.input) : formatCost(breakdown.input.cost)}\"": "title=\"输入: ${isTokenMode ? formatTokens(totals.input) : formatCost(breakdown.input.cost)}\"",
+    "title=\"Cache Write: ${isTokenMode ? formatTokens(totals.cacheWrite) : formatCost(breakdown.cacheWrite.cost)}\"": "title=\"缓存写入: ${isTokenMode ? formatTokens(totals.cacheWrite) : formatCost(breakdown.cacheWrite.cost)}\"",
+    "title=\"Cache Read: ${isTokenMode ? formatTokens(totals.cacheRead) : formatCost(breakdown.cacheRead.cost)}\"": "title=\"缓存读取: ${isTokenMode ? formatTokens(totals.cacheRead) : formatCost(breakdown.cacheRead.cost)}\"",
+
+    "\"Cache hit rate = cache read / (input + cache read). Higher is better.\"": "\"缓存命中率 = 缓存读取 / (输入 + 缓存读取)。越高越好。\"",
+    "\"Error rate = errors / total messages. Lower is better.\"": "\"错误率 = 错误数 / 总消息数。越低越好。\"",
+    "\"Throughput shows tokens per minute over active time. Higher is better.\"": "\"吞吐量显示活动时间内每分钟的令牌数。越高越好。\"",
+    "\"Average tokens per message in this range.\"": "\"此范围内每条消息的平均令牌数。\"",
+    "\"Average cost per message when providers report costs.\"": "\"当提供商报告成本时，每条消息的平均成本。\"",
+    "\"Average cost per message when providers report costs. Cost data is missing for some or all sessions in this range.\"": "\"当提供商报告成本时，每条消息的平均成本。此范围内部分或全部会话缺少成本数据。\"",
+
+    "title=\"Total user + assistant messages in range.\"": "title=\"范围内的用户和助手消息总数。\"",
+    "title=\"Total tool call count across sessions.\"": "title=\"跨会话的工具调用总数。\"",
+    "title=\"Total message/tool errors in range.\"": "title=\"范围内的消息/工具错误总数。\"",
+    "title=\"Distinct sessions in the range.\"": "title=\"范围内的不同会话数。\"",
+
+    "\"Messages\"": "\"消息\"",
+    "\"Tool Calls\"": "\"工具调用\"",
+    "\"Errors\"": "\"错误\"",
+    "\"Sessions\"": "\"会话\"",
+    "\"Avg Tokens / Msg\"": "\"平均令牌数/消息\"",
+    "\"Avg Cost / Msg\"": "\"平均成本/消息\"",
+    "\"Throughput\"": "\"吞吐量\"",
+    "\"Error Rate\"": "\"错误率\"",
+    "\"Cache Hit Rate\"": "\"缓存命中率\"",
+
+    "renderInsightList(\"Top Models\"": "renderInsightList(\"热门模型\"",
+    "renderInsightList(\"Top Providers\"": "renderInsightList(\"热门提供商\"",
+    "renderInsightList(\"Top Tools\"": "renderInsightList(\"热门工具\"",
+    "renderInsightList(\"Top Agents\"": "renderInsightList(\"热门代理\"",
+    "renderInsightList(\"Top Channels\"": "renderInsightList(\"热门渠道\"",
+    "renderPeakErrorList(\"Peak Error Days\"": "renderPeakErrorList(\"错误峰值日期\"",
+    "renderPeakErrorList(\"Peak Error Hours\"": "renderPeakErrorList(\"错误峰值小时\"",
+    "renderInsightList(\"Model Mix\"": "renderInsightList(\"模型组合\"",
+
+    "\"No model data\"": "\"无模型数据\"",
+    "\"No provider data\"": "\"无提供商数据\"",
+    "\"No tool calls\"": "\"无工具调用\"",
+    "\"No agent data\"": "\"无代理数据\"",
+    "\"No channel data\"": "\"无渠道数据\"",
+    "\"No error data\"": "\"无错误数据\"",
+    "\"No data in range\"": "\"范围内无数据\"",
+    "\"No recent sessions\"": "\"无最近会话\"",
+    "\"No sessions in range\"": "\"范围内无会话\"",
+    "\"No usage data for this session.\"": "\"此会话无使用数据。\"",
+    "\"No context data\"": "\"无上下文数据\"",
+    "\"No messages\"": "\"无消息\"",
+    "\"No messages match the filters.\"": "\"没有消息匹配筛选条件。\"",
+    "\"No timeline data yet.\"": "\"暂无时间线数据。\"",
+    "\"No timeline data\"": "\"无时间线数据\"",
+
+    "title=${sessionSortDir === \"desc\" ? \"Descending\" : \"Ascending\"}": "title=${sessionSortDir === \"desc\" ? \"降序\" : \"升序\"}",
+    "title=\"Copy session name\"": "title=\"复制会话名称\"",
+    "title=\"Close session details\"": "title=\"关闭会话详情\"",
+    "title=\"Remove filter\"": "title=\"移除筛选器\"",
+
+    "title=\"Assistant output tokens\"": "title=\"助手输出令牌\"",
+    "title=\"User + tool input tokens\"": "title=\"用户 + 工具输入令牌\"",
+    "title=\"Tokens written to cache\"": "title=\"写入缓存的令牌\"",
+    "title=\"Tokens read from cache\"": "title=\"从缓存读取的令牌\"",
+
+    "${showAll ? \"Collapse\" : \"Expand all\"}": "${showAll ? \"折叠\" : \"展开全部\"}",
+    "${expandedAll ? \"Collapse All\" : \"Expand All\"}": "${expandedAll ? \"全部折叠\" : \"全部展开\"}",
+    "${contextPct || \"Base context per message\"}": "${contextPct || \"每条消息的基础上下文\"}",
+
+    "renderFilterSelect(\"agent\", \"Agent\"": "renderFilterSelect(\"agent\", \"代理\"",
+    "renderFilterSelect(\"channel\", \"Channel\"": "renderFilterSelect(\"channel\", \"渠道\"",
+    "renderFilterSelect(\"provider\", \"Provider\"": "renderFilterSelect(\"provider\", \"提供商\"",
+    "renderFilterSelect(\"model\", \"Model\"": "renderFilterSelect(\"model\", \"模型\"",
+    "renderFilterSelect(\"tool\", \"Tool\"": "renderFilterSelect(\"tool\", \"工具\"",
+
+    "\"Sessions CSV\"": "\"会话 CSV\"",
+    "\"Daily CSV\"": "\"每日 CSV\"",
+    "\"JSON\"": "\"JSON\"",
+
+    "\"Activity by Time\"": "\"按时间活动\"",
+    "\"Estimates require session timestamps.\"": "\"估算需要会话时间戳。\"",
+    "\"Day of Week\"": "\"星期\"",
+    "\"Midnight\"": "\"午夜\"",
+    "\"4am\"": "\"凌晨4点\"",
+    "\"8am\"": "\"上午8点\"",
+    "\"Noon\"": "\"中午\"",
+    "\"4pm\"": "\"下午4点\"",
+    "\"8pm\"": "\"晚上8点\"",
+    "\"Low → High token density\"": "\"低 → 高令牌密度\"",
+
+    "const WEEKDAYS = [\"Sun\", \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", \"Sat\"]": "const WEEKDAYS = [\"日\", \"一\", \"二\", \"三\", \"四\", \"五\", \"六\"]",
+
+    "log.role === \"user\" ? \"You\" : log.role === \"assistant\" ? \"Assistant\" : \"Tool\"": "log.role === \"user\" ? \"你\" : log.role === \"assistant\" ? \"助手\" : \"工具\"",
+
+    "\"System Prompt Breakdown\"": "\"系统提示词分解\"",
+    "\"Conversation\"": "\"对话\"",
+
+    "\"Select a date range and click Refresh to load usage.\"": "\"选择日期范围并点击刷新以加载使用情况。\"",
+    "\"Tip: use filters or click bars to filter days.\"": "\"提示：使用筛选器或点击条形图来筛选日期。\"",
+    "\"Showing first 1,000 sessions. Narrow date range for complete results.\"": "\"显示前 1,000 个会话。缩小日期范围以获得完整结果。\"",
+
+    "\"Total\"": "\"总计\"",
+    "\"By Type\"": "\"按类型\"",
+    "\"Per Turn\"": "\"每轮\"",
+    "\"Cumulative\"": "\"累计\"",
+    "\"Tokens\"": "\"令牌\"",
+    "\"Cost\"": "\"成本\"",
+    "\"All\"": "\"全部\"",
+    "\"Recently viewed\"": "\"最近查看\"",
+    "\"Duration\"": "\"持续时间\"",
+    "\"Sort\"": "\"排序\"",
+    "\"Recent\"": "\"最近\"",
+
+    "\"Clear All\"": "\"全部清除\"",
+    "\"Clear Selection\"": "\"清除选择\"",
+    "\"Filter (client-side)\"": "\"筛选（客户端）\"",
+
+    "\"Days:\"": "\"天数：\"",
+    "\"Hours:\"": "\"小时：\"",
+    "\"Session:\"": "\"会话：\""
+  }
+}
