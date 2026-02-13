@@ -1,16 +1,12 @@
 # OpenClaw 汉化发行版
 
-[![Release](https://img.shields.io/github/v/release/1186258278/OpenClawChineseTranslation?label=稳定版)](https://github.com/1186258278/OpenClawChineseTranslation/releases)
-[![npm](https://img.shields.io/npm/v/@qingchencloud/openclaw-zh?label=npm)](https://www.npmjs.com/package/@qingchencloud/openclaw-zh)
-[![Nightly Build](https://github.com/1186258278/OpenClawChineseTranslation/actions/workflows/nightly.yml/badge.svg)](https://github.com/1186258278/OpenClawChineseTranslation/actions/workflows/nightly.yml)
-[![Platform](https://img.shields.io/badge/平台-Windows%20|%20macOS%20|%20Linux-blue)](https://github.com/1186258278/OpenClawChineseTranslation/releases)
+[![Release](https://img.shields.io/github/v/release/cnrot/OpenClaw-zh?label=稳定版)](https://github.com/cnrot/OpenClaw-zh/releases)
+[![npm](https://img.shields.io/npm/v/@coryrowe/openclaw-zh?label=npm)](https://www.npmjs.com/package/@coryrowe/openclaw-zh)
+[![Nightly Build](https://github.com/cnrot/OpenClaw-zh/actions/workflows/nightly.yml/badge.svg)](https://github.com/cnrot/OpenClaw-zh/actions/workflows/nightly.yml)
+[![Platform](https://img.shields.io/badge/平台-Windows%20|%20macOS%20|%20Linux-blue)](https://github.com/cnrot/OpenClaw-zh/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> **每小时自动同步** [OpenClaw](https://github.com/openclaw/openclaw) 官方更新，汉化版延迟 < 1 小时！
-
-<p align="center">
-  <a href="https://openclaw.qt.cool/"><img src="https://img.shields.io/badge/🔥_汉化官网-openclaw.qt.cool-dc2626?style=for-the-badge" alt="汉化官网"></a>
-</p>
+> **每 4 小时自动同步** [OpenClaw](https://github.com/openclaw/openclaw) 官方更新！
 
 ---
 
@@ -19,20 +15,6 @@
 [OpenClaw](https://openclaw.ai/) 是 GitHub 100,000+ Stars 的**开源个人 AI 助手平台**。它运行在你的电脑上，通过 WhatsApp、Telegram、Discord 等聊天应用与你的 AI 助手交互，帮你处理邮件、日历、文件等日常事务。
 
 **本项目 = OpenClaw + 全中文界面**，CLI 命令行和 Dashboard 网页控制台均已深度汉化。
-
----
-
-## 🏷️ 合作伙伴
-
-**胜算云** - 国内 AI API 聚合平台，新用户注册送额度，充值尊享 7 折优惠！
-
-| 阶梯 | 春节消耗 | 奖励 |
-|------|---------|------|
-| 尝鲜礼 | ≥50元 | 5元 模力券 |
-| 极客礼 | ≥100元 | 10元 模力券 + Kimi K2.5 七折卡(7天) |
-| 大神礼 | ≥500元 | 50元 模力券 + Kimi K2.5 七折卡(7天) |
-
-[查看活动 →](https://www.shengsuanyun.com/activity/4184b48a6be4443cbe13e86e091e43b4?from=CH_4BVI0BM2) · [注册账号 →](https://www.shengsuanyun.com/?from=CH_4BVI0BM2)
 
 ---
 
@@ -45,7 +27,7 @@
 ### 第 1 步：安装
 
 ```bash
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 ```
 
 ### 第 2 步：初始化（推荐守护进程模式）
@@ -174,7 +156,7 @@ docker restart openclaw
 
 ```bash
 # 卸载汉化版
-npm uninstall -g @qingchencloud/openclaw-zh
+npm uninstall -g @coryrowe/openclaw-zh
 
 # 如果之前安装过原版，也一并卸载
 npm uninstall -g openclaw
@@ -212,15 +194,15 @@ sudo systemctl daemon-reload
 ## 更新升级
 
 ```bash
-npm update -g @qingchencloud/openclaw-zh
+npm update -g @coryrowe/openclaw-zh
 ```
 
 > 查看当前版本：`openclaw --version`
 
 | 版本 | 安装命令 | 说明 |
 |------|----------|------|
-| **稳定版** | `npm install -g @qingchencloud/openclaw-zh@latest` | 经过测试，推荐使用 |
-| **最新版** | `npm install -g @qingchencloud/openclaw-zh@nightly` | 每小时同步上游，体验新功能 |
+| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | 经过测试，推荐使用 |
+| **最新版** | `npm install -g @coryrowe/openclaw-zh@nightly` | 每 4 小时同步上游，体验新功能 |
 
 ---
 
@@ -230,19 +212,19 @@ npm update -g @qingchencloud/openclaw-zh
 
 | 镜像源 | 拉取命令 | 适用 |
 |--------|----------|------|
-| **Docker Hub（国内推荐）** | `docker pull 1186258278/openclaw-zh:latest` | 国内用户 |
-| GitHub Container Registry | `docker pull ghcr.io/1186258278/openclaw-zh:latest` | 海外用户 |
+| **Docker Hub（国内推荐）** | `docker pull coryrowe/openclaw-zh:latest` | 国内用户 |
+| GitHub Container Registry | `docker pull ghcr.io/cnrot/openclaw-zh:latest` | 海外用户 |
 
 ### 一键部署（最简单）
 
 ```bash
 # Linux/macOS — 加 --china 自动使用国内镜像
-curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash -s -- --china
+curl -fsSL https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.sh | bash -s -- --china
 ```
 
 ```powershell
 # Windows PowerShell — 加 -China 自动使用国内镜像
-irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.ps1 | iex
+irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 # 或: .\docker-deploy.ps1 -China
 ```
 
@@ -250,8 +232,8 @@ irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docke
 
 ```bash
 # 国内用户使用 Docker Hub 镜像
-IMAGE=1186258278/openclaw-zh:latest
-# 海外用户使用: IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+IMAGE=coryrowe/openclaw-zh:latest
+# 海外用户使用: IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 初始化（首次运行）
 # Docker 需要交互式运行来配置 AI 模型和 API 密钥
@@ -288,16 +270,16 @@ docker run -d --name openclaw -p 18789:18789 \
 
 **Linux / macOS：**
 ```bash
-curl -fsSL -o install.sh https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/install.sh && bash install.sh
+curl -fsSL -o install.sh https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/install.sh &amp;&amp; bash install.sh
 ```
 
 **Windows PowerShell：**
 ```powershell
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/install.ps1" -OutFile "install.ps1" -Encoding UTF8; powershell -ExecutionPolicy Bypass -File ".\install.ps1"
+Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/install.ps1" -OutFile "install.ps1" -Encoding UTF8; powershell -ExecutionPolicy Bypass -File ".\install.ps1"
 ```
 
-> 如遇中文乱码，直接用 npm 安装：`npm install -g @qingchencloud/openclaw-zh@latest`
+> 如遇中文乱码，直接用 npm 安装：`npm install -g @coryrowe/openclaw-zh@latest`
 
 </details>
 
@@ -306,11 +288,11 @@ Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTr
 
 ```bash
 # 使用 npmmirror 镜像源（国内推荐）
-npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
+npm install -g @coryrowe/openclaw-zh@latest --registry=https://registry.npmmirror.com
 
 # 或全局设置镜像源后再安装
 npm config set registry https://registry.npmmirror.com
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 ```
 
 </details>
@@ -320,10 +302,10 @@ npm install -g @qingchencloud/openclaw-zh@latest
 
 ```bash
 # pnpm
-pnpm add -g @qingchencloud/openclaw-zh@latest
+pnpm add -g @coryrowe/openclaw-zh@latest
 
 # yarn
-yarn global add @qingchencloud/openclaw-zh@latest
+yarn global add @coryrowe/openclaw-zh@latest
 ```
 
 </details>
@@ -333,10 +315,10 @@ yarn global add @qingchencloud/openclaw-zh@latest
 
 ```bash
 # 方案 1: 使用 GitHub 代理
-git clone https://ghproxy.net/https://github.com/1186258278/OpenClawChineseTranslation.git
+git clone https://ghproxy.net/https://github.com/cnrot/OpenClaw-zh.git
 
 # 方案 2: 无需 git，直接用 npx 运行
-npx @qingchencloud/openclaw-zh@latest
+npx @coryrowe/openclaw-zh@latest
 ```
 
 </details>
@@ -355,10 +337,10 @@ npx @qingchencloud/openclaw-zh@latest
 **解决**：加 `--registry` 参数使用国内镜像源，或直接用 Docker 部署：
 ```bash
 # 方案 1：npm 加镜像源
-npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
+npm install -g @coryrowe/openclaw-zh@latest --registry=https://registry.npmmirror.com
 
 # 方案 2：用 Docker（国内最快）
-docker pull 1186258278/openclaw-zh:latest
+docker pull coryrowe/openclaw-zh:latest
 ```
 
 > [详细说明 →](docs/FAQ.md#安装卡住不动--下载很慢)
@@ -373,7 +355,7 @@ docker pull 1186258278/openclaw-zh:latest
 **解决**：先卸载原版，再重装汉化版：
 ```bash
 npm uninstall -g openclaw
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 ```
 
 验证：`openclaw --version` 输出应包含 `-zh` 后缀。
@@ -399,7 +381,7 @@ openclaw devices approve <ID>   # 批准该设备
 
 # Docker 用户如果无法运行 CLI，可以一键关闭设备认证：
 docker run --rm -v openclaw-data:/root/.openclaw \
-  1186258278/openclaw-zh:latest \
+  coryrowe/openclaw-zh:latest \
   openclaw config set gateway.controlUi.dangerouslyDisableDeviceAuth true
 # 然后重启容器
 ```
@@ -414,7 +396,7 @@ docker run --rm -v openclaw-data:/root/.openclaw \
 |------|----------|------|
 | **远程 / 内网访问不了** | `openclaw config set gateway.bind lan` 然后重启 | [查看 →](docs/FAQ.md#npm-安装后内网其他电脑无法访问) |
 | **`Missing config`** | 运行 `openclaw onboard` 初始化配置 | [查看 →](docs/FAQ.md#missing-config-run-openclaw-setup) |
-| **`Missing workspace template`** | 升级到最新版即可：`npm install -g @qingchencloud/openclaw-zh@latest` | [查看 →](docs/FAQ.md#missing-workspace-template-agentsmd) |
+| **`Missing workspace template`** | 升级到最新版即可：`npm install -g @coryrowe/openclaw-zh@latest` | [查看 →](docs/FAQ.md#missing-workspace-template-agentsmd) |
 | **Ollama 无响应** | 检查 baseURL 是否为 `http://localhost:11434/v1` | [查看 →](docs/FAQ.md#本地-ollama-模型调用无响应) |
 | **Docker 容器启动后退出** | 确保启动命令包含 `openclaw gateway run` | [查看 →](docs/DOCKER_GUIDE.md#常见错误排查) |
 | **Docker 打不开 Dashboard** | 设置 `gateway.bind lan` 监听所有网卡 | [查看 →](docs/DOCKER_GUIDE.md#常见错误排查) |
@@ -427,26 +409,10 @@ docker run --rm -v openclaw-data:/root/.openclaw \
 
 ```bash
 # 安装更新检测插件
-npm install -g @qingchencloud/openclaw-updater
+npm install -g @coryrowe/openclaw-updater
 ```
 
-访问 [插件市场](https://openclaw.qt.cool/) 获取更多插件。
-
----
-
-## 微信交流群
-
-<p align="center">
-  <img src="docs/image/wx_01.png" alt="微信交流1群" width="200px">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/image/wx_02.png" alt="微信交流2群" width="200px">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/image/wx_03.png" alt="微信交流3群" width="200px">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/image/wx_04.png" alt="微信交流4群" width="200px">
-  <br>
-  <em>1群、2群、3群均已满200人，请扫码加入4群 | 碰到问题也可以直接在群内反馈</em>
-</p>
+访问 [插件市场](https://github.com/VoltAgent/awesome-openclaw-skills) 获取更多插件。
 
 ---
 
@@ -454,24 +420,12 @@ npm install -g @qingchencloud/openclaw-updater
 
 | 汉化版 | 上游项目 |
 |--------|----------|
-| [汉化官网](https://openclaw.qt.cool/) | [OpenClaw 官网](https://openclaw.ai/) |
-| [npm 包](https://www.npmjs.com/package/@qingchencloud/openclaw-zh) | [OpenClaw GitHub](https://github.com/openclaw/openclaw) |
-| [GitHub 仓库](https://github.com/1186258278/OpenClawChineseTranslation) | [ClawHub 技能市场](https://clawhub.dev/) |
-| [GitHub Pages](https://1186258278.github.io/OpenClawChineseTranslation/) | [Discord 社区](https://discord.gg/openclaw) |
+| [npm 包](https://www.npmjs.com/package/@coryrowe/openclaw-zh) | [OpenClaw GitHub](https://github.com/openclaw/openclaw) |
+| [GitHub 仓库](https://github.com/cnrot/OpenClaw-zh) | [ClawHub 技能市场](https://clawhub.dev/) |
+| [GitHub Pages](https://cnrot.github.io/OpenClaw-zh/) | [Discord 社区](https://discord.gg/openclaw) |
 
 ---
 
-## 参与贡献
-
-- [报告问题](https://github.com/1186258278/OpenClawChineseTranslation/issues) | [改进翻译](docs/CONTRIBUTING.md) | [翻译规范](docs/TRANSLATION_GUIDE.md) | 给项目点个 Star
-
----
-
-## 关于
-
-**武汉晴辰天下网络科技有限公司** 出品 | [qingchencloud.com](https://qingchencloud.com/) | [MIT License](LICENSE)
-
-© 武汉晴辰天下网络科技有限公司 | [鄂ICP备2025164966号](https://beian.miit.gov.cn/)
 
 
 <!-- AI Translation Tools: Claude, Copilot, Codex, Devin, Amazon Q, CodeRabbit -->

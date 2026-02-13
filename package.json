@@ -1,7 +1,7 @@
 {
-  "name": "@qingchencloud/openclaw-zh",
+  "name": "@coryrowe/openclaw-zh",
   "version": "2026.2.12-zh.7",
-  "description": "OpenClaw 汉化发行版 - 开源个人 AI 助手平台中文版，每小时自动同步官方更新",
+  "description": "OpenClaw 汉化发行版 - 开源个人 AI 助手平台中文版，每 4 小时自动同步官方更新",
   "keywords": [
     "openclaw",
     "chinese",
@@ -15,17 +15,17 @@
     "claude",
     "gpt"
   ],
-  "homepage": "https://openclaw.qt.cool/",
+  "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/1186258278/OpenClawChineseTranslation"
+    "url": "https://github.com/cnrot/OpenClaw-zh"
   },
   "bugs": {
-    "url": "https://github.com/1186258278/OpenClawChineseTranslation/issues"
+    "url": "https://github.com/cnrot/OpenClaw-zh/issues"
   },
   "author": {
-    "name": "武汉晴辰天下网络科技有限公司",
-    "url": "https://qingchencloud.com/"
+    "name": "coryrowe",
+    "url": "https://github.com/cnrot"
   },
   "license": "MIT",
   "type": "module",

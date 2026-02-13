@@ -3,18 +3,14 @@
 # 
 # OpenClaw: 开源个人 AI 助手平台
 # 官方网站: https://openclaw.ai/
-# 汉化项目: https://openclaw.qt.cool/
-#
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 #
 # 用法:
-#   irm https://xxx/install.ps1 | iex                    # 安装稳定版
-#   & ([scriptblock]::Create((irm https://xxx/install.ps1))) -Nightly  # 安装最新版
+#   irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1 | iex                    # 安装稳定版
+#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1))) -Nightly  # 安装最新版
 # ============================================================
 
 param(
     [switch]$Nightly,
-    [string]$ShengsuanyunKey,
     [switch]$Help
 )
 
@@ -34,22 +30,16 @@ if ($Help) {
     Write-Host "OpenClaw 汉化版安装脚本" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "用法:"
-    Write-Host "  irm https://xxx/install.ps1 | iex                              # 安装稳定版"
-    Write-Host "  iex ""& { `$(irm https://xxx/install.ps1) } -Nightly""          # 安装最新版"
-    Write-Host "  .\install.ps1 -ShengsuanyunKey sk-xxx                           # 安装并配置胜算云"
+    Write-Host "  irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1 | iex                              # 安装稳定版"
+    Write-Host "  iex ""& { `$(irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1) } -Nightly""          # 安装最新版"
     Write-Host ""
     Write-Host "选项:"
-    Write-Host "  -Nightly            安装最新版（每小时自动构建，追踪上游最新代码）"
-    Write-Host "  -ShengsuanyunKey    安装后自动配置胜算云 API（跳过交互式初始化）"
+    Write-Host "  -Nightly            安装最新版（每 4 小时自动构建，追踪上游最新代码）"
     Write-Host "  -Help               显示帮助信息"
     Write-Host ""
     Write-Host "版本说明:"
     Write-Host "  稳定版 (@latest)   手动发布，经过测试，推荐生产使用"
-    Write-Host "  最新版 (@nightly)  每小时自动构建，追踪上游，适合测试"
-    Write-Host ""
-    Write-Host "胜算云快速配置:"
-    Write-Host "  获取 API 密钥: https://shengsuanyun.com"
-    Write-Host "  新用户福利: 注册送 10 元体验金！"
+    Write-Host "  最新版 (@nightly)  每 4 小时自动构建，追踪上游，适合测试"
     exit 0
 }
 
@@ -59,10 +49,7 @@ function Show-Banner {
     Write-Host "╔═══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "║     🦞 OpenClaw 汉化发行版                                ║" -ForegroundColor Cyan
-    Write-Host "║        开源个人 AI 助手平台                              ║" -ForegroundColor Cyan
-    Write-Host "║                                                           ║" -ForegroundColor Cyan
-    Write-Host "║     武汉晴辰天下网络科技有限公司                          ║" -ForegroundColor Cyan
-    Write-Host "║     https://openclaw.qt.cool/                             ║" -ForegroundColor Cyan
+    Write-Host "║        开源个人 AI 助手平台                                ║" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "╚═══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
@@ -130,7 +117,7 @@ function Install-ChineseVersion {
     Write-Host "📦 正在安装 OpenClaw 汉化版 [$VersionName]..." -ForegroundColor Blue
     Write-Host ""
     
-    npm install -g "@qingchencloud/openclaw-zh@$NpmTag"
+    npm install -g "@coryrowe/openclaw-zh@$NpmTag"
     
     if ($LASTEXITCODE -ne 0) {
         Write-Host "❌ 安装失败，请检查网络连接" -ForegroundColor Red
@@ -154,43 +141,6 @@ function Invoke-SetupIfNeeded {
     # 用户明确跳过
     if ($env:OPENCLAW_SKIP_SETUP -eq "1") {
         Write-Host "⚠ OPENCLAW_SKIP_SETUP=1，跳过自动初始化" -ForegroundColor Yellow
-        return
-    }
-    
-    # 如果提供了胜算云 Key，执行胜算云专属非交互式 onboard
-    if ($ShengsuanyunKey) {
-        Write-Host ""
-        Write-Host "🔧 正在配置胜算云..." -ForegroundColor Blue
-        Write-Host ""
-        
-        try {
-            & openclaw onboard --non-interactive `
-                --auth-choice shengsuanyun-api-key `
-                --shengsuanyun-api-key $ShengsuanyunKey `
-                --accept-risk 2>$null
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "✓ 胜算云配置完成！" -ForegroundColor Green
-            } else {
-                throw "onboard failed"
-            }
-        } catch {
-            # 降级：设置环境变量后重试
-            $env:SHENGSUANYUN_API_KEY = $ShengsuanyunKey
-            try {
-                & openclaw onboard --non-interactive `
-                    --auth-choice shengsuanyun-api-key `
-                    --accept-risk 2>$null
-                if ($LASTEXITCODE -eq 0) {
-                    Write-Host "✓ 胜算云配置完成（环境变量模式）！" -ForegroundColor Green
-                } else {
-                    throw "retry failed"
-                }
-            } catch {
-                Write-Host "⚠ 胜算云自动配置失败，请手动运行:" -ForegroundColor Yellow
-                Write-Host "   openclaw onboard"
-                Write-Host "   然后在认证选项中选择 '胜算云 API 密钥'"
-            }
-        }
         return
     }
     
@@ -232,7 +182,7 @@ function Show-Success {
     Write-Host ""
     if ($Nightly) {
         Write-Host "⚠  提示：您安装的是最新版，追踪上游最新代码，可能不够稳定。" -ForegroundColor Yellow
-        Write-Host "   切换到稳定版：npm install -g @qingchencloud/openclaw-zh@latest" -ForegroundColor Yellow
+        Write-Host "   切换到稳定版：npm install -g @coryrowe/openclaw-zh@latest" -ForegroundColor Yellow
         Write-Host ""
     }
     Write-Host "🚀 快速开始：" -ForegroundColor Cyan
@@ -262,9 +212,7 @@ function Show-Success {
     Write-Host ""
     Write-Host "📚 更多信息：" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "   汉化官网: https://openclaw.qt.cool/"
     Write-Host "   原版官网: https://openclaw.ai/"
-    Write-Host "   GitHub:   https://github.com/1186258278/OpenClawChineseTranslation"
     Write-Host ""
 }
 

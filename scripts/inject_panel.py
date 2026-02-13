@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 OpenClaw 汉化版 - 功能面板注入脚本
-武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 
 在构建后将功能面板 JS/CSS 注入到 Dashboard 构建产物中。
 支持同时注入到多个 Dashboard 目录（新版 A2UI + 旧版 control-ui）。

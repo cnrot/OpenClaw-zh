@@ -250,7 +250,7 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/docker-deploy
 # ============================================================
 
 @test "脚本使用正确的镜像地址" {
-    grep -q "ghcr.io/1186258278/openclaw-zh" "$SCRIPT_PATH"
+    grep -q "ghcr.io/cnrot/openclaw-zh" "$SCRIPT_PATH"
 }
 
 @test "脚本定义默认端口" {

@@ -5,14 +5,11 @@
 # 自动完成：环境检测、初始化配置、远程访问设置、启动容器
 #
 # 官方网站: https://openclaw.ai/
-# 汉化项目: https://openclaw.qt.cool/
-#
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 #
 # 用法:
-#   curl -fsSL https://xxx/docker-deploy.sh | bash
-#   curl -fsSL https://xxx/docker-deploy.sh | bash -s -- --token mytoken
-#   curl -fsSL https://xxx/docker-deploy.sh | bash -s -- --local-only
+#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.sh | bash -s -- --token mytoken
+#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.sh | bash -s -- --local-only
 # ============================================================
 
 set -e
@@ -29,12 +26,10 @@ NC='\033[0m' # No Color
 CONTAINER_NAME="openclaw"
 VOLUME_NAME="openclaw-data"
 PORT="18789"
-IMAGE="ghcr.io/1186258278/openclaw-zh:nightly"
-IMAGE_CN="1186258278/openclaw-zh:nightly"
+IMAGE="coryrowe/openclaw-zh:nightly"
 GATEWAY_TOKEN=""
 LOCAL_ONLY=false
 SKIP_INIT=false
-USE_CHINA=false
 
 # 解析参数
 while [[ $# -gt 0 ]]; do
@@ -59,16 +54,12 @@ while [[ $# -gt 0 ]]; do
             SKIP_INIT=true
             shift
             ;;
-        --china|--cn)
-            USE_CHINA=true
-            shift
-            ;;
         --help|-h)
             echo "OpenClaw Docker 一键部署脚本"
             echo ""
             echo "用法:"
-            echo "  curl -fsSL https://xxx/docker-deploy.sh | bash"
-            echo "  curl -fsSL https://xxx/docker-deploy.sh | bash -s -- [选项]"
+            echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.sh | bash"
+            echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.sh | bash -s -- [选项]"
             echo ""
             echo "选项:"
             echo "  --token <token>   设置访问令牌（推荐）"
@@ -76,7 +67,6 @@ while [[ $# -gt 0 ]]; do
             echo "  --name <name>     设置容器名（默认: openclaw）"
             echo "  --local-only      仅本地访问（不配置远程访问）"
             echo "  --skip-init       跳过初始化（容器已存在时）"
-            echo "  --china, --cn     使用 Docker Hub 国内加速源"
             echo "  --help            显示帮助信息"
             echo ""
             echo "示例:"
@@ -101,9 +91,6 @@ print_banner() {
     echo "║                                                           ║"
     echo "║     🦞 OpenClaw 汉化发行版 - Docker 部署                  ║"
     echo "║        开源个人 AI 助手平台                              ║"
-    echo "║                                                           ║"
-    echo "║     武汉晴辰天下网络科技有限公司                          ║"
-    echo "║     https://openclaw.qt.cool/                             ║"
     echo "║                                                           ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
@@ -338,9 +325,8 @@ print_success() {
     
     echo -e "${CYAN}📚 更多信息：${NC}"
     echo ""
-    echo "   汉化官网: https://openclaw.qt.cool/"
     echo "   文档:     https://docs.openclaw.ai/"
-    echo "   GitHub:   https://github.com/1186258278/OpenClawChineseTranslation"
+    echo "   GitHub:   https://github.com/cnrot/OpenClaw-zh"
     echo ""
 }
 
@@ -352,12 +338,6 @@ main() {
     echo ""
     
     check_docker
-    
-    # 国内加速源
-    if [ "$USE_CHINA" = true ]; then
-        IMAGE="$IMAGE_CN"
-        echo -e "${GREEN}✓${NC} 使用 Docker Hub 国内加速源: $IMAGE"
-    fi
     
     # 如果没有指定 Token，生成一个
     if [ -z "$GATEWAY_TOKEN" ] && [ "$LOCAL_ONLY" = false ]; then

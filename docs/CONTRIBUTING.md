@@ -1,7 +1,5 @@
 # 贡献指南
 
-感谢你对 **OpenClaw 汉化发行版** 的关注！
-
 > 返回 [README](../README.md)
 
 ---
@@ -22,8 +20,8 @@
 
 ```bash
 # 1. 克隆汉化项目
-git clone https://github.com/1186258278/OpenClawChineseTranslation.git
-cd OpenClawChineseTranslation
+git clone https://github.com/cnrot/OpenClaw-zh.git
+cd OpenClaw-zh
 
 # 2. 克隆上游 OpenClaw 源码
 git clone https://github.com/openclaw/openclaw.git openclaw
@@ -104,8 +102,8 @@ OpenClawChineseTranslation/
 
 ```bash
 # 1. 克隆汉化项目
-git clone https://github.com/1186258278/OpenClawChineseTranslation.git
-cd OpenClawChineseTranslation
+git clone https://github.com/cnrot/OpenClaw-zh.git
+cd OpenClaw-zh
 
 # 2. 克隆上游 OpenClaw 源码
 git clone https://github.com/openclaw/openclaw.git openclaw
@@ -226,18 +224,3 @@ npm run cli -- verify
 
 ---
 
-## 行为准则
-
-- 尊重他人
-- 接受建设性批评
-- 专注于改进项目
-
----
-
-## 联系我们
-
-- GitHub Issues: [提交问题](https://github.com/1186258278/OpenClawChineseTranslation/issues)
-- 官网: https://openclaw.qt.cool/
-- 公司官网: https://qingchencloud.com/
-
-感谢你的贡献！

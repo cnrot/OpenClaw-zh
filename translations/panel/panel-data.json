@@ -13,7 +13,7 @@
     {
       "id": "config-api-key",
       "question": "如何配置 API Key？",
-      "answer": "Anthropic (Claude)\n```\nopenclaw config set auth.anthropic.apiKey sk-ant-xxx\n```\n获取地址：https://console.anthropic.com/\n\nOpenAI (GPT)\n```\nopenclaw config set auth.openai.apiKey sk-xxx\n```\n获取地址：https://platform.openai.com/\n\n智谱 GLM（需安装插件）\n```\nnpm install -g @qingchencloud/openclaw-zhipu\nopenclaw config set auth.zhipu.apiKey xxx\n```\n获取地址：https://open.bigmodel.cn/"
+      "answer": "Anthropic (Claude)\n```\nopenclaw config set auth.anthropic.apiKey sk-ant-xxx\n```\n获取地址：https://console.anthropic.com/\n\nOpenAI (GPT)\n```\nopenclaw config set auth.openai.apiKey sk-xxx\n```\n获取地址：https://platform.openai.com/"
     },
     {
       "id": "config-whatsapp",
@@ -58,100 +58,24 @@
     {
       "id": "icon-missing",
       "question": "图标不显示？",
-      "answer": "更新到最新版即可：\n```\nnpm update -g @qingchencloud/openclaw-zh\n```"
+      "answer": "更新到最新版即可：\n```\nnpm update -g @coryrowe/openclaw-zh\n```"
     },
     {
       "id": "still-english",
       "question": "安装后运行还是英文？",
-      "answer": "先卸载原版，再安装汉化版：\n```\nnpm uninstall -g openclaw\nnpm install -g @qingchencloud/openclaw-zh@latest\n```"
-    },
-    {
-      "id": "config-shengsuanyun",
-      "question": "如何配置胜算云 API（国内聚合平台）？",
-      "answer": "胜算云是国内 API 聚合平台，支持多种 AI 模型。新用户注册可获赠体验金（限时活动，详情以官网为准）。\n\n方法1：通过向导配置\n```\nopenclaw onboard\n```\n选择「胜算云」即可。\n\n方法2：命令行配置（推荐）\n```\nopenclaw onboard --non-interactive --accept-risk --auth-choice shengsuanyun-api-key --shengsuanyun-api-key YOUR_API_KEY --no-install-daemon\nopenclaw config set agents.defaults.model.primary \"shengsuanyun/openai/gpt-4.1-nano\"\n```\n\n方法3：Dashboard AI 创作面板\n打开功能面板 → AI 创作 → 输入 API Key\n\n获取 API Key：https://www.shengsuanyun.com/?from=CH_4BVI0BM2"
+      "answer": "先卸载原版，再安装汉化版：\n```\nnpm uninstall -g openclaw\nnpm install -g @coryrowe/openclaw-zh@latest\n```"
     },
     {
       "id": "how-to-update",
       "question": "如何更新到最新版？",
-      "answer": "npm 环境：\n```\nnpm update -g @qingchencloud/openclaw-zh\n```\n\nDocker 环境：\n```\ndocker pull ghcr.io/1186258278/openclaw-zh:latest\ndocker stop openclaw && docker rm openclaw\n# 重新启动容器\n```"
+      "answer": "npm 环境：\n```\nnpm update -g @coryrowe/openclaw-zh\n```\n\nDocker 环境：\n```\ndocker pull coryrowe/openclaw-zh:latest\ndocker stop openclaw && docker rm openclaw\n# 重新启动容器\n```"
     }
   ],
-  "plugins": [
-    {
-      "id": "updater",
-      "name": "OpenClaw 自动更新器",
-      "description": "为 OpenClaw 添加自动检测更新和一键升级功能",
-      "version": "1.0.0",
-      "status": "available",
-      "install": "npm install -g @qingchencloud/openclaw-updater",
-      "aiPrompt": "请帮我安装 @qingchencloud/openclaw-updater 插件，这是 OpenClaw 汉化版的自动更新插件"
-    },
-    {
-      "id": "zhipu-provider",
-      "name": "智谱 GLM 模型提供商",
-      "description": "为 OpenClaw 添加智谱 GLM-4 系列模型支持，包括 GLM-4-Plus、GLM-4-Flash（免费）等",
-      "version": "1.0.0",
-      "status": "available",
-      "install": "npm install -g @qingchencloud/openclaw-zhipu",
-      "aiPrompt": "请帮我安装 @qingchencloud/openclaw-zhipu 插件，我想使用智谱 GLM 模型"
-    },
-    {
-      "id": "deepseek-provider",
-      "name": "DeepSeek 模型提供商",
-      "description": "为 OpenClaw 添加 DeepSeek-V3 模型支持",
-      "version": "待开发",
-      "status": "coming-soon",
-      "install": "",
-      "aiPrompt": ""
-    },
-    {
-      "id": "qwen-provider",
-      "name": "通义千问模型提供商",
-      "description": "为 OpenClaw 添加阿里通义千问 Qwen 系列模型支持",
-      "version": "待开发",
-      "status": "coming-soon",
-      "install": "",
-      "aiPrompt": ""
-    }
-  ],
-  "provider": {
-    "name": "胜算云",
-    "description": "国内 API 聚合平台，支持多种 AI 模型",
-    "website": "https://www.shengsuanyun.com",
-    "apiKeyUrl": "https://www.shengsuanyun.com/?from=CH_4BVI0BM2",
-    "affiliateParam": "from=CH_4BVI0BM2",
-    "apiBase": "https://router.shengsuanyun.com/api/v1",
-    "modelsApi": "https://router.shengsuanyun.com/api/v1/models",
-    "multimodalApi": "https://router.shengsuanyun.com/api/v1/models/multimodal",
-    "defaultLlmModel": "openai/gpt-4.1-nano",
-    "defaultImageModel": "ali/z-image-turbo",
-    "defaultVideoModel": "google/veo3.1-fast-preview",
-    "defaultAudioModel": "runway/eleven_text_to_sound_v2",
-    "preferredLlmModels": [
-      "openai/gpt-4.1-nano",
-      "openai/o4-mini",
-      "deepseek/deepseek-v3.2",
-      "anthropic/claude-sonnet-4.5",
-      "google/gemini-2.5-flash"
-    ],
-    "modelCacheTtlMs": 300000,
-    "multimodalEnabled": true,
-    "multimodalBadgeText": "内测中",
-    "promoText": "🎁 新用户送10元",
-    "promoNote": "限时活动，详情以官网为准",
-    "getKeyText": "点此获取 API Key",
-    "footerText": "生成的内容仅供参考 · API 费用由胜算云收取",
-    "footerLink": "了解更多",
-    "cooperationLink": "",
-    "cooperationText": "商务合作"
-  },
   "about": {
     "project": "OpenClaw 汉化发行版",
-    "company": "武汉晴辰天下网络科技有限公司",
-    "website": "https://openclaw.qt.cool/",
-    "github": "https://github.com/1186258278/OpenClawChineseTranslation",
-    "npm": "https://www.npmjs.com/package/@qingchencloud/openclaw-zh",
-    "companyWebsite": "https://qingchencloud.com/",
+    "website": "",
+    "github": "https://github.com/cnrot/OpenClaw-zh",
+    "npm": "https://www.npmjs.com/package/@coryrowe/openclaw-zh",
     "license": "MIT License"
   }
 }

@@ -1,14 +1,13 @@
 # ============================================================
 # OpenClaw 汉化发行版 - 最新版（Nightly）自动构建工作流
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 # ============================================================
 #
 # 触发方式：
-#   - 每小时42分自动运行
+#   - 每 4 小时自动运行
 #   - 手动触发
 #
 # 版本说明：
-#   - 最新版 (@nightly)：本工作流发布，每小时自动构建，追踪上游最新代码
+#   - 最新版 (@nightly)：本工作流发布，每 4 小时自动构建，追踪上游最新代码
 #   - 稳定版 (@latest)：sync-and-release.yml 发布，手动打 tag 触发
 #
 # 优化：
@@ -16,21 +15,21 @@
 #   - 调用 build-core.yml 复用工作流，减少代码重复
 #
 # 用户安装：
-#   npm install -g @qingchencloud/openclaw-zh@nightly
+#   npm install -g @coryrowe/openclaw-zh@nightly
 # ============================================================
 
 name: 最新版构建 (Nightly)
 
 on:
   schedule:
-    # 每小时42分构建（错峰避免冲突）
-    - cron: '42 * * * *'
+    # 每 4 小时构建一次（错峰避免冲突）
+    - cron: '42 */4 * * *'
   workflow_dispatch:
     inputs:
       force_build:
         description: '强制构建（跳过版本检查）'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 env:
@@ -179,15 +178,15 @@ jobs:
             
             ## 🌙 OpenClaw 汉化版 - 最新版 (Nightly)
             
-            > ⚠️ **警告**：此为每小时自动构建版本，追踪上游最新代码，可能包含未完全测试的更改。
+            > ⚠️ **警告**：此为每 4 小时自动构建版本，追踪上游最新代码，可能包含未完全测试的更改。
             > 
-            > 🔒 **需要稳定版？** 请安装 `@latest`：`npm install -g @qingchencloud/openclaw-zh@latest`
+            > 🔒 **需要稳定版？** 请安装 `@latest`：`npm install -g @coryrowe/openclaw-zh@latest`
             
             **构建时间**: ${{ needs.build.outputs.build_date }} ${{ needs.build.outputs.build_time }} (UTC)
             **上游版本**: ${{ needs.check-upstream.outputs.upstream_version }}
             **上游 SHA**: ${{ needs.check-upstream.outputs.upstream_sha }}
             **Nightly 版本**: ${{ needs.check-upstream.outputs.nightly_version }}
-            **发布类型**: 最新版 (Nightly) - 每小时自动构建
+            **发布类型**: 最新版 (Nightly) - 每 4 小时自动构建
             
             ---
             
@@ -206,23 +205,19 @@ jobs:
             
             ```bash
             # 安装 nightly 版本
-            npm install -g @qingchencloud/openclaw-zh@nightly
+            npm install -g @coryrowe/openclaw-zh@nightly
             
             # 切换回稳定版
-            npm install -g @qingchencloud/openclaw-zh@latest
+            npm install -g @coryrowe/openclaw-zh@latest
             ```
             
             ---
             
             ### 🔗 相关链接
-            
-            - 🔥 官网: https://openclaw.qt.cool/
-            - 📖 稳定版: https://github.com/1186258278/OpenClawChineseTranslation/releases/latest
-            - 📦 npm: https://www.npmjs.com/package/@qingchencloud/openclaw-zh
+            - 📖 稳定版: https://github.com/cnrot/OpenClaw-zh/releases/latest
+            - 📦 npm: https://www.npmjs.com/package/@coryrowe/openclaw-zh
             
             ---
-            
-            **武汉晴辰天下网络科技有限公司** | https://qingchencloud.com/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -241,7 +236,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/openclaw-zh
+          images: ghcr.io/cnrot/openclaw-zh
           tags: |
             type=raw,value=nightly
             type=raw,value=${{ needs.check-upstream.outputs.nightly_version }}
@@ -254,8 +249,8 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           # 使用 Registry Cache - 比 GHA 缓存更稳定，无 10GB 限制
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache
+          cache-to: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache,mode=max
           platforms: linux/amd64,linux/arm64
         continue-on-error: true
 
@@ -273,7 +268,7 @@ jobs:
       - name: 登录 Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ github.repository_owner }}
+          username: coryrowe
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         continue-on-error: true
 
@@ -283,9 +278,9 @@ jobs:
           context: ./openclaw
           push: true
           tags: |
-            ${{ github.repository_owner }}/openclaw-zh:nightly
-            ${{ github.repository_owner }}/openclaw-zh:${{ needs.check-upstream.outputs.nightly_version }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache
+            coryrowe/openclaw-zh:nightly
+            coryrowe/openclaw-zh:${{ needs.check-upstream.outputs.nightly_version }}
+          cache-from: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache
           platforms: linux/amd64,linux/arm64
         continue-on-error: true
 
@@ -293,9 +288,9 @@ jobs:
       - name: 更新 Docker Hub 描述
         uses: peter-evans/dockerhub-description@v4
         with:
-          username: ${{ github.repository_owner }}
+          username: coryrowe
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ github.repository_owner }}/openclaw-zh
+          repository: coryrowe/openclaw-zh
           readme-filepath: ./DOCKER_README.md
         continue-on-error: true
 
@@ -314,11 +309,11 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📦 安装方式" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**npm**: \`npm install -g @qingchencloud/openclaw-zh@nightly\`" >> $GITHUB_STEP_SUMMARY
+          echo "**npm**: \`npm install -g @coryrowe/openclaw-zh@nightly\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Docker (ghcr.io)**: \`docker pull ghcr.io/1186258278/openclaw-zh:nightly\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Docker (ghcr.io)**: \`docker pull ghcr.io/cnrot/openclaw-zh:nightly\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Docker Hub (国内加速)**: \`docker pull 1186258278/openclaw-zh:nightly\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Docker Hub (国内加速)**: \`docker pull coryrowe/openclaw-zh:nightly\`" >> $GITHUB_STEP_SUMMARY
 
   # ==================== 无变更时的摘要 ====================
   skip-summary:

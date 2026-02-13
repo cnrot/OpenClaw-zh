@@ -8,15 +8,14 @@
 # 远程访问请参考 README.md 中的配置说明。
 #
 # 官方网站: https://openclaw.ai/
-# 汉化项目: https://openclaw.qt.cool/
 # ============================================================
 
 version: '3.8'
 
 services:
   openclaw:
-    # 国内用户可替换为: 1186258278/openclaw-zh:nightly（Docker Hub 加速）
-    image: ghcr.io/1186258278/openclaw-zh:nightly
+    # 国内用户可替换为: coryrowe/openclaw-zh:nightly（Docker Hub 加速）
+    image: ghcr.io/cnrot/openclaw-zh:nightly
     container_name: openclaw
     ports:
       - "18789:18789"
@@ -42,7 +41,7 @@ services:
     # ========== 首次使用说明 ==========
     # 
     # 方式 1: 一键脚本（推荐）
-    #   curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash
+    #   curl -fsSL https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.sh | bash
     #
     # 方式 2: 手动初始化
     #   docker-compose exec openclaw openclaw setup

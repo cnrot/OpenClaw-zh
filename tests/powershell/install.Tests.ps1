@@ -109,7 +109,7 @@ Describe "脚本配置" {
     
     It "脚本使用正确的包名" {
         $scriptContent = Get-Content $ScriptPath -Raw
-        $scriptContent | Should -Match '@qingchencloud/openclaw-zh'
+        $scriptContent | Should -Match '@coryrowe/openclaw-zh'
     }
 }
 

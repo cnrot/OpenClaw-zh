@@ -164,7 +164,7 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
     
     run install_chinese
     [ "$status" -eq 0 ]
-    [[ "$output" == *"@qingchencloud/openclaw-zh@latest"* ]]
+    [[ "$output" == *"@coryrowe/openclaw-zh@latest"* ]]
 }
 
 @test "install_chinese 调用正确的 npm 命令 (nightly)" {
@@ -179,7 +179,7 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
     
     run install_chinese
     [ "$status" -eq 0 ]
-    [[ "$output" == *"@qingchencloud/openclaw-zh@nightly"* ]]
+    [[ "$output" == *"@coryrowe/openclaw-zh@nightly"* ]]
 }
 
 # ============================================================

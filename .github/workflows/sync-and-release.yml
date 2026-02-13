@@ -1,6 +1,5 @@
 # ============================================================
 # OpenClaw 汉化发行版 - 稳定版发布工作流
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 # ============================================================
 # 
 # 触发方式：
@@ -9,7 +8,7 @@
 #
 # 版本说明：
 #   - 稳定版 (@latest)：本工作流发布，手动打 tag 触发
-#   - 最新版 (@nightly)：nightly.yml 发布，每小时自动构建
+#   - 最新版 (@nightly)：nightly.yml 发布，每 4 小时自动构建
 #
 # 优化：
 #   - 调用 build-core.yml 复用工作流，减少代码重复
@@ -144,35 +143,32 @@ jobs:
             
             **稳定版（推荐）：**
             ```bash
-            npm install -g @qingchencloud/openclaw-zh@latest
+            npm install -g @coryrowe/openclaw-zh@latest
             ```
             
-            **最新版（每小时更新）：**
+            **最新版（每 4 小时更新）：**
             ```bash
-            npm install -g @qingchencloud/openclaw-zh@nightly
+            npm install -g @coryrowe/openclaw-zh@nightly
             ```
             
             **一键安装脚本：**
             ```bash
             # Linux/macOS
-            curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/install.sh | bash
+            curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash
             
             # Windows PowerShell
-            powershell -c "irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/install.ps1 | iex"
+            powershell -c "irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1 | iex"
             ```
             
             ---
             
             ### 🔗 相关链接
             
-            - 🔥 官网: https://openclaw.qt.cool/
-            - 📖 文档: https://github.com/1186258278/OpenClawChineseTranslation
-            - 📦 npm: https://www.npmjs.com/package/@qingchencloud/openclaw-zh
-            - 🌙 最新版: https://github.com/1186258278/OpenClawChineseTranslation/releases/tag/nightly
+            - 📖 文档: https://github.com/cnrot/OpenClaw-zh
+            - 📦 npm: https://www.npmjs.com/package/@coryrowe/openclaw-zh
+            - 🌙 最新版: https://github.com/cnrot/OpenClaw-zh/releases/tag/nightly
             
             ---
-            
-            **武汉晴辰天下网络科技有限公司** | https://qingchencloud.com/
           draft: false
           prerelease: false
         env:
@@ -193,7 +189,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/openclaw-zh
+          images: ghcr.io/cnrot/openclaw-zh
           tags: |
             type=raw,value=latest
             type=raw,value=${{ needs.prepare.outputs.release_version }}
@@ -206,8 +202,8 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           # 使用 Registry Cache - 比 GHA 缓存更稳定，无 10GB 限制
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache
+          cache-to: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache,mode=max
           platforms: linux/amd64,linux/arm64
 
       - name: 设置镜像为公开
@@ -224,7 +220,7 @@ jobs:
       - name: 登录 Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ github.repository_owner }}
+          username: coryrowe
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         continue-on-error: true
 
@@ -234,9 +230,9 @@ jobs:
           context: ./openclaw
           push: true
           tags: |
-            ${{ github.repository_owner }}/openclaw-zh:latest
-            ${{ github.repository_owner }}/openclaw-zh:${{ needs.prepare.outputs.release_version }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/openclaw-zh:buildcache
+            coryrowe/openclaw-zh:latest
+            coryrowe/openclaw-zh:${{ needs.prepare.outputs.release_version }}
+          cache-from: type=registry,ref=ghcr.io/cnrot/openclaw-zh:buildcache
           platforms: linux/amd64,linux/arm64
         continue-on-error: true
 
@@ -244,9 +240,9 @@ jobs:
       - name: 更新 Docker Hub 描述
         uses: peter-evans/dockerhub-description@v4
         with:
-          username: ${{ github.repository_owner }}
+          username: coryrowe
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ github.repository_owner }}/openclaw-zh
+          repository: coryrowe/openclaw-zh
           readme-filepath: ./DOCKER_README.md
         continue-on-error: true
 
@@ -263,8 +259,8 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📦 安装方式" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**npm**: \`npm install -g @qingchencloud/openclaw-zh@latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "**npm**: \`npm install -g @coryrowe/openclaw-zh@latest\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Docker (ghcr.io)**: \`docker pull ghcr.io/1186258278/openclaw-zh:latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Docker (ghcr.io)**: \`docker pull ghcr.io/cnrot/openclaw-zh:latest\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Docker Hub (国内加速)**: \`docker pull 1186258278/openclaw-zh:latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Docker Hub (国内加速)**: \`docker pull coryrowe/openclaw-zh:latest\`" >> $GITHUB_STEP_SUMMARY

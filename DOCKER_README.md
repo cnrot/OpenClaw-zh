@@ -1,22 +1,30 @@
+<!--
+ * @Author: cnrot
+ * @Date: 2026-02-14 00:53:54
+ * @LastEditors: cnrot
+ * @LastEditTime: 2026-02-14 02:55:35
+ * @FilePath: \OpenClaw-zh\DOCKER_README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 # OpenClaw 汉化发行版 - Docker 镜像
 
-> OpenClaw (Clawdbot/Moltbot) 中文汉化版，CLI 和 Dashboard 均已深度汉化，每小时自动同步上游官方更新。
+> OpenClaw (Clawdbot/Moltbot) 中文汉化版，CLI 和 Dashboard 均已深度汉化，每 4 小时自动同步上游官方更新。
 
 ## 快速启动
 
 ```bash
 # 初始化配置
 docker run --rm -v openclaw-data:/root/.openclaw \
-  1186258278/openclaw-zh:latest openclaw setup
+  coryrowe/openclaw-zh:latest openclaw setup
 
 docker run --rm -v openclaw-data:/root/.openclaw \
-  1186258278/openclaw-zh:latest openclaw config set gateway.mode local
+  coryrowe/openclaw-zh:latest openclaw config set gateway.mode local
 
 # 启动容器
 docker run -d --name openclaw -p 18789:18789 \
   -v openclaw-data:/root/.openclaw \
   --restart unless-stopped \
-  1186258278/openclaw-zh:latest \
+  coryrowe/openclaw-zh:latest \
   openclaw gateway run
 ```
 
@@ -27,7 +35,7 @@ docker run -d --name openclaw -p 18789:18789 \
 | 标签 | 说明 |
 |------|------|
 | `latest` | 稳定版，经过测试推荐使用 |
-| `nightly` | 每小时同步上游最新代码 |
+| `nightly` | 每 4 小时同步上游最新代码 |
 
 ## Docker Compose
 
@@ -35,7 +43,7 @@ docker run -d --name openclaw -p 18789:18789 \
 version: '3.8'
 services:
   openclaw:
-    image: 1186258278/openclaw-zh:latest
+    image: coryrowe/openclaw-zh:latest
     container_name: openclaw
     ports:
       - "18789:18789"
@@ -52,16 +60,11 @@ volumes:
 
 | 镜像源 | 地址 | 适用场景 |
 |--------|------|----------|
-| **Docker Hub** | `1186258278/openclaw-zh` | 国内用户推荐 |
-| **ghcr.io** | `ghcr.io/1186258278/openclaw-zh` | 海外用户 |
+| **Docker Hub** | `coryrowe/openclaw-zh` | 国内用户推荐 |
+| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` | 海外用户 |
 
 ## 相关链接
 
-- [汉化官网](https://openclaw.qt.cool/)
-- [GitHub 仓库](https://github.com/1186258278/OpenClawChineseTranslation)
-- [完整 Docker 部署指南](https://github.com/1186258278/OpenClawChineseTranslation/blob/main/docs/DOCKER_GUIDE.md)
-- [npm 包](https://www.npmjs.com/package/@qingchencloud/openclaw-zh)
-
----
-
-**武汉晴辰天下网络科技有限公司** | [qingchencloud.com](https://qingchencloud.com/)
+- [GitHub 仓库](https://github.com/cnrot/OpenClaw-zh)
+- [完整 Docker 部署指南](https://github.com/cnrot/OpenClaw-zh/blob/main/docs/DOCKER_GUIDE.md)
+- [npm 包](https://www.npmjs.com/package/@coryrowe/openclaw-zh)

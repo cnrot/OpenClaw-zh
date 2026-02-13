@@ -1,6 +1,5 @@
 # ============================================================
 # OpenClaw 汉化发行版 - Docker 镜像
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 # ============================================================
 #
 # 注意：此 Dockerfile 假设代码已在 GitHub Actions 中构建完成
@@ -16,10 +15,9 @@
 # syntax=docker/dockerfile:1.4
 FROM node:22-slim
 
-LABEL org.opencontainers.image.source="https://github.com/1186258278/OpenClawChineseTranslation"
+LABEL org.opencontainers.image.source="https://github.com/cnrot/OpenClaw-zh"
 LABEL org.opencontainers.image.description="OpenClaw 汉化发行版 - 开源个人 AI 助手中文版"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL maintainer="武汉晴辰天下网络科技有限公司 <contact@qingchencloud.com>"
 
 # 设置环境变量（这一层很少变化，放最前面）
 ENV CHROME_BIN=/usr/bin/chromium
@@ -31,12 +29,12 @@ ENV NODE_ENV=production
 # 这一层变化频率低，会被缓存
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update &amp;&amp; apt-get install -y --no-install-recommends \
     git \
     curl \
     ca-certificates \
     chromium \
-    && rm -rf /tmp/*
+    &amp;&amp; rm -rf /tmp/*
 
 # 设置工作目录
 WORKDIR /app
@@ -49,7 +47,7 @@ COPY . .
 
 # 重新安装原生依赖以匹配当前架构（使用 cache-mount 加速 npm）
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
-    npm rebuild || true && \
+    npm rebuild || true &amp;&amp; \
     npm install --prefer-offline --no-audit --omit=dev || true
 
 # 全局安装

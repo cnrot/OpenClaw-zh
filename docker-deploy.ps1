@@ -4,13 +4,10 @@
 # 自动完成：环境检测、初始化配置、远程访问设置、启动容器
 #
 # 官方网站: https://openclaw.ai/
-# 汉化项目: https://openclaw.qt.cool/
-#
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 #
 # 用法:
-#   irm https://xxx/docker-deploy.ps1 | iex
-#   & ([scriptblock]::Create((irm https://xxx/docker-deploy.ps1))) -Token "mytoken"
+#   irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.ps1 | iex
+#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.ps1))) -Token "mytoken"
 # ============================================================
 
 param(
@@ -19,7 +16,6 @@ param(
     [string]$Name = "openclaw",
     [switch]$LocalOnly,
     [switch]$SkipInit,
-    [switch]$China,
     [switch]$Help
 )
 
@@ -27,20 +23,15 @@ $ErrorActionPreference = "Stop"
 
 # 默认配置
 $VolumeName = "openclaw-data"
-if ($China) {
-    $Image = "1186258278/openclaw-zh:nightly"
-    Write-Host "✓ 使用 Docker Hub 国内加速源: $Image" -ForegroundColor Green
-} else {
-    $Image = "ghcr.io/1186258278/openclaw-zh:nightly"
-}
+$Image = "coryrowe/openclaw-zh:nightly"
 
 # 帮助信息
 if ($Help) {
     Write-Host "OpenClaw Docker 一键部署脚本" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "用法:"
-    Write-Host "  irm https://xxx/docker-deploy.ps1 | iex"
-    Write-Host "  & ([scriptblock]::Create((irm https://xxx/docker-deploy.ps1))) -Token 'mytoken'"
+    Write-Host "  irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.ps1 | iex"
+    Write-Host "  & ([scriptblock]::Create((irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/docker-deploy.ps1))) -Token 'mytoken'"
     Write-Host ""
     Write-Host "选项:"
     Write-Host "  -Token <token>   设置访问令牌（推荐）"
@@ -48,7 +39,6 @@ if ($Help) {
     Write-Host "  -Name <name>     设置容器名（默认: openclaw）"
     Write-Host "  -LocalOnly       仅本地访问（不配置远程访问）"
     Write-Host "  -SkipInit        跳过初始化（容器已存在时）"
-    Write-Host "  -China           使用 Docker Hub 国内加速源"
     Write-Host "  -Help            显示帮助信息"
     Write-Host ""
     Write-Host "示例:"
@@ -67,9 +57,6 @@ function Show-Banner {
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "║     🦞 OpenClaw 汉化发行版 - Docker 部署                  ║" -ForegroundColor Cyan
     Write-Host "║        开源个人 AI 助手平台                              ║" -ForegroundColor Cyan
-    Write-Host "║                                                           ║" -ForegroundColor Cyan
-    Write-Host "║     武汉晴辰天下网络科技有限公司                          ║" -ForegroundColor Cyan
-    Write-Host "║     https://openclaw.qt.cool/                             ║" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "╚═══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
@@ -318,9 +305,8 @@ function Show-Success {
     
     Write-Host "📚 更多信息：" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "   汉化官网: https://openclaw.qt.cool/"
     Write-Host "   文档:     https://docs.openclaw.ai/"
-    Write-Host "   GitHub:   https://github.com/1186258278/OpenClawChineseTranslation"
+    Write-Host "   GitHub:   https://github.com/cnrot/OpenClaw-zh"
     Write-Host ""
 }
 

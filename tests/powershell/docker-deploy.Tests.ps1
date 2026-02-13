@@ -112,7 +112,7 @@ Describe "脚本配置" {
     
     It "脚本使用正确的镜像地址" {
         $scriptContent = Get-Content $ScriptPath -Raw
-        $scriptContent | Should -Match 'ghcr.io/1186258278/openclaw-zh'
+        $scriptContent | Should -Match 'ghcr.io/cnrot/openclaw-zh'
     }
     
     It "脚本使用 nightly 标签" {

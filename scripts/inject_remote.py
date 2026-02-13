@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 OpenClaw 汉化版 - 远程注入脚本
-武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 
 用于在远程服务器上将功能面板注入到 Dashboard 构建产物中。
 """

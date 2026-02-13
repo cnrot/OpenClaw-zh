@@ -30,11 +30,11 @@
 
 ```bash
 # 方法1：使用淘宝镜像源安装（推荐）
-npm install -g @qingchencloud/openclaw-zh@latest --registry=https://registry.npmmirror.com
+npm install -g @coryrowe/openclaw-zh@latest --registry=https://registry.npmmirror.com
 
 # 方法2：先切换全局镜像源，再安装
 npm config set registry https://registry.npmmirror.com
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 ```
 
 如果是 Docker 镜像拉取慢，参考 [Docker 部署指南](DOCKER_GUIDE.md) 中的镜像加速方案。
@@ -55,13 +55,13 @@ Control UI assets not found. Build them with `pnpm ui:build` (auto-installs UI d
 ```bash
 # 第1步：卸载所有版本
 npm uninstall -g openclaw
-npm uninstall -g @qingchencloud/openclaw-zh
+npm uninstall -g @coryrowe/openclaw-zh
 
 # 第2步：清除 npm 缓存
 npm cache clean --force
 
 # 第3步：重新安装汉化版
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 
 # 第4步：验证安装
 openclaw --version
@@ -104,7 +104,7 @@ environment:
 Error: Cannot find module '/home/xxx/.npm-global/lib/node_modules/openclaw/dist/index.js'
 ```
 
-**原因**：systemd 服务配置文件中写的路径是原版 `openclaw` 的路径，但你安装的是汉化版 `@qingchencloud/openclaw-zh`，两者的路径不同。
+**原因**：systemd 服务配置文件中写的路径是原版 `openclaw` 的路径，但你安装的是汉化版 `@coryrowe/openclaw-zh`，两者的路径不同。
 
 **解决方案**：
 
@@ -112,7 +112,7 @@ Error: Cannot find module '/home/xxx/.npm-global/lib/node_modules/openclaw/dist/
 # 第1步：找到汉化版的实际安装路径
 which openclaw
 # 或者
-npm list -g @qingchencloud/openclaw-zh --depth=0
+npm list -g @coryrowe/openclaw-zh --depth=0
 
 # 第2步：重新安装守护进程（会自动修复路径）
 openclaw onboard --install-daemon
@@ -149,7 +149,7 @@ systemctl --user restart openclaw-gateway
 npm uninstall -g openclaw
 
 # 再安装汉化版
-npm install -g @qingchencloud/openclaw-zh@latest
+npm install -g @coryrowe/openclaw-zh@latest
 
 # 验证（应显示汉化版版本号，如 2026.2.4-zh.1）
 openclaw --version
@@ -264,14 +264,14 @@ docker logs openclaw
 docker stop openclaw && docker rm openclaw
 
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw setup
+  ghcr.io/cnrot/openclaw-zh:latest openclaw setup
 
 docker run --rm -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw config set gateway.mode local
+  ghcr.io/cnrot/openclaw-zh:latest openclaw config set gateway.mode local
 
 docker run -d --name openclaw -p 18789:18789 \
   -v openclaw-data:/root/.openclaw --restart unless-stopped \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw gateway run
+  ghcr.io/cnrot/openclaw-zh:latest openclaw gateway run
 ```
 
 ---
@@ -609,7 +609,7 @@ openclaw config set auth.openai.apiKey sk-your-api-key
 
 **解决方案**：
 ```bash
-npm update -g @qingchencloud/openclaw-zh
+npm update -g @coryrowe/openclaw-zh
 ```
 
 ---
@@ -618,14 +618,14 @@ npm update -g @qingchencloud/openclaw-zh
 
 ```bash
 # npm 用户
-npm update -g @qingchencloud/openclaw-zh
+npm update -g @coryrowe/openclaw-zh
 
 # Docker 用户
-docker pull ghcr.io/1186258278/openclaw-zh:latest
+docker pull ghcr.io/cnrot/openclaw-zh:latest
 docker stop openclaw && docker rm openclaw
 docker run -d --name openclaw -p 18789:18789 \
   -v openclaw-data:/root/.openclaw --restart unless-stopped \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw gateway run
+  ghcr.io/cnrot/openclaw-zh:latest openclaw gateway run
 ```
 
 > 查看当前版本：`openclaw --version`
@@ -635,7 +635,7 @@ docker run -d --name openclaw -p 18789:18789 \
 ### 如何切换回原版
 
 ```bash
-npm uninstall -g @qingchencloud/openclaw-zh
+npm uninstall -g @coryrowe/openclaw-zh
 npm install -g openclaw
 ```
 
@@ -645,19 +645,19 @@ npm install -g openclaw
 
 **Windows：**
 ```powershell
-npm uninstall -g @qingchencloud/openclaw-zh
+npm uninstall -g @coryrowe/openclaw-zh
 npm uninstall -g openclaw
 Remove-Item -Recurse -Force "$env:USERPROFILE\.openclaw"   # 删除配置（可选）
 ```
 
 **Linux / macOS：**
 ```bash
-npm uninstall -g @qingchencloud/openclaw-zh
+npm uninstall -g @coryrowe/openclaw-zh
 npm uninstall -g openclaw
 rm -rf ~/.openclaw   # 删除配置（可选）
 ```
 
-> 注意：`npm uninstall openclaw` 不会卸载汉化版，必须用完整包名 `@qingchencloud/openclaw-zh`
+> 注意：`npm uninstall openclaw` 不会卸载汉化版，必须用完整包名 `@coryrowe/openclaw-zh`
 
 ---
 
@@ -673,7 +673,7 @@ rm -rf ~/.openclaw   # 删除配置（可选）
 # 推荐：使用 named volume 而不是 bind mount
 docker run -d --name openclaw -p 18789:18789 \
   -v openclaw-data:/root/.openclaw \
-  ghcr.io/1186258278/openclaw-zh:latest openclaw gateway run
+  ghcr.io/cnrot/openclaw-zh:latest openclaw gateway run
 
 # 如果必须用 bind mount，修复权限
 sudo chown -R 1000:1000 /你的目录路径
@@ -686,7 +686,7 @@ sudo chown -R 1000:1000 /你的目录路径
 ```bash
 # 清理登录缓存后重试
 docker logout ghcr.io
-docker pull ghcr.io/1186258278/openclaw-zh:latest
+docker pull ghcr.io/cnrot/openclaw-zh:latest
 ```
 
 ---
@@ -696,7 +696,7 @@ docker pull ghcr.io/1186258278/openclaw-zh:latest
 可以使用 Docker 方式部署，参考 [Docker 部署指南](DOCKER_GUIDE.md)。
 
 核心步骤：
-1. 在 NAS 的 Docker 管理界面中拉取镜像 `ghcr.io/1186258278/openclaw-zh:latest`
+1. 在 NAS 的 Docker 管理界面中拉取镜像 `ghcr.io/cnrot/openclaw-zh:latest`
 2. 创建容器，端口映射 `18789:18789`，挂载数据卷
 3. 进入容器终端执行 `openclaw setup` 初始化
 4. 设置 `openclaw config set gateway.mode local`
@@ -704,6 +704,6 @@ docker pull ghcr.io/1186258278/openclaw-zh:latest
 
 ---
 
-> 没找到你的问题？请通过 [GitHub Issues](https://github.com/1186258278/OpenClawChineseTranslation/issues) 反馈，我们会尽快回复。
+> 没找到你的问题？请通过 [GitHub Issues](https://github.com/cnrot/OpenClaw-zh/issues) 反馈，我们会尽快回复。
 
 > 返回 [README](../README.md) | [Docker 部署指南](DOCKER_GUIDE.md)

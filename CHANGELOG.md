@@ -1,3 +1,11 @@
+<!--
+ * @Author: cnrot
+ * @Date: 2026-02-14 00:53:54
+ * @LastEditors: cnrot
+ * @LastEditTime: 2026-02-14 02:34:19
+ * @FilePath: \OpenClaw-zh\CHANGELOG.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 # 更新日志
 
 ## [2026.2.9-zh.1] - 2026-02-10
@@ -31,4 +39,4 @@
 
 ### 🐳 Docker 镜像
 - Nightly 构建已包含上述所有更新。
-- 推荐使用标签: `1186258278/openclaw-zh:nightly` (或等待稳定版发布)。
+- 推荐使用标签: `coryrowe/openclaw-zh:nightly` (或等待稳定版发布)。

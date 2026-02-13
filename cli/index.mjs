@@ -78,9 +78,8 @@ ${colors.bold}本地开发:${colors.reset}
   npm run cli -- apply --dry-run
 
 ${colors.bold}更多信息:${colors.reset}
-  官网:   https://openclaw.qt.cool/
-  GitHub: https://github.com/1186258278/OpenClawChineseTranslation
-  npm:    https://www.npmjs.com/package/@qingchencloud/openclaw-zh
+  GitHub: https://github.com/cnrot/OpenClaw-zh
+  npm:    https://www.npmjs.com/package/@coryrowe/openclaw-zh
 `);
 }
 

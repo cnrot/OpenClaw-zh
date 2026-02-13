@@ -27,10 +27,10 @@
 
 ```bash
 # Linux / macOS
-curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.sh | bash
+curl -fsSL https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.sh | bash
 
 # Windows PowerShell
-irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-deploy.ps1 | iex
+irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 ```
 
 ---
@@ -39,10 +39,10 @@ irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docke
 
 | 镜像源 | 地址 | 适用场景 |
 |--------|------|----------|
-| **Docker Hub** | `1186258278/openclaw-zh` | **国内用户推荐**，速度快 |
-| **ghcr.io** | `ghcr.io/1186258278/openclaw-zh` | 海外用户 / 默认 |
+| **Docker Hub** | `coryrowe/openclaw-zh` | **国内用户推荐**，速度快 |
+| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` | 海外用户 / 默认 |
 
-> 以下命令默认使用 ghcr.io 地址。**国内用户**将 `ghcr.io/1186258278/openclaw-zh` 替换为 `1186258278/openclaw-zh` 即可加速。
+> 以下命令默认使用 ghcr.io 地址。**国内用户**将 `ghcr.io/cnrot/openclaw-zh` 替换为 `coryrowe/openclaw-zh` 即可加速。
 
 ---
 
@@ -52,9 +52,9 @@ irm https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docke
 
 ```bash
 # 镜像地址（国内用户推荐使用 Docker Hub 加速）
-# 海外: ghcr.io/1186258278/openclaw-zh:latest
-# 国内: 1186258278/openclaw-zh:latest
-IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+# 海外: ghcr.io/cnrot/openclaw-zh:latest
+# 国内: coryrowe/openclaw-zh:latest
+IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 初始化配置（首次运行，需要交互式配置 AI 模型和 API 密钥）
 
@@ -101,9 +101,9 @@ docker run -d --name openclaw -p 18789:18789 -v openclaw-data:/root/.openclaw --
 
 ```bash
 # 镜像地址（国内服务器推荐 Docker Hub）
-# 海外: ghcr.io/1186258278/openclaw-zh:latest
-# 国内: 1186258278/openclaw-zh:latest
-IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+# 海外: ghcr.io/cnrot/openclaw-zh:latest
+# 国内: coryrowe/openclaw-zh:latest
+IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 创建数据卷
 docker volume create openclaw-data
@@ -270,7 +270,7 @@ sudo systemctl reload nginx
 
 ```bash
 # 下载配置文件
-curl -fsSL https://cdn.jsdelivr.net/gh/1186258278/OpenClawChineseTranslation@main/docker-compose.yml -o docker-compose.yml
+curl -fsSL https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-compose.yml -o docker-compose.yml
 
 # 启动（首次会自动初始化）
 docker-compose up -d
@@ -282,8 +282,8 @@ docker-compose up -d
 version: '3.8'
 services:
   openclaw:
-    # 国内用户可替换为: 1186258278/openclaw-zh:latest
-    image: ghcr.io/1186258278/openclaw-zh:latest
+    # 国内用户可替换为: coryrowe/openclaw-zh:latest
+    image: ghcr.io/cnrot/openclaw-zh:latest
     container_name: openclaw
     ports:
       - "18789:18789"
@@ -303,8 +303,8 @@ volumes:
 
 ```bash
 # 1. 克隆汉化项目
-git clone https://github.com/1186258278/OpenClawChineseTranslation.git
-cd OpenClawChineseTranslation
+git clone https://github.com/cnrot/OpenClaw-zh.git
+cd OpenClaw-zh
 
 # 2. 克隆上游源码
 git clone https://github.com/openclaw/openclaw.git openclaw
@@ -395,9 +395,9 @@ docker system prune -a --volumes
 
 ```bash
 # 镜像地址（国内用户推荐 Docker Hub）
-# 海外: ghcr.io/1186258278/openclaw-zh:latest
-# 国内: 1186258278/openclaw-zh:latest
-IMAGE=ghcr.io/1186258278/openclaw-zh:latest
+# 海外: ghcr.io/cnrot/openclaw-zh:latest
+# 国内: coryrowe/openclaw-zh:latest
+IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 拉取最新镜像
 docker pull $IMAGE

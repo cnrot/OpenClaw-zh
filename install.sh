@@ -4,13 +4,10 @@
 # 
 # OpenClaw: 开源个人 AI 助手平台
 # 官方网站: https://openclaw.ai/
-# 汉化项目: https://openclaw.qt.cool/
-#
-# 武汉晴辰天下网络科技有限公司 | https://qingchencloud.com/
 #
 # 用法:
-#   curl -fsSL https://xxx/install.sh | bash           # 安装稳定版
-#   curl -fsSL https://xxx/install.sh | bash -s -- --nightly  # 安装最新版
+#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash           # 安装稳定版
+#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash -s -- --nightly  # 安装最新版
 # ============================================================
 
 set -e
@@ -27,7 +24,6 @@ NC='\033[0m' # No Color
 INSTALL_NIGHTLY=false
 NPM_TAG="latest"
 VERSION_NAME="稳定版"
-SHENGSUANYUN_KEY=""
 
 # 解析参数
 while [[ $# -gt 0 ]]; do
@@ -38,30 +34,21 @@ while [[ $# -gt 0 ]]; do
             VERSION_NAME="最新版 (Nightly)"
             shift
             ;;
-        --shengsuanyun-key)
-            SHENGSUANYUN_KEY="$2"
-            shift 2
-            ;;
         --help|-h)
             echo "OpenClaw 汉化版安装脚本"
             echo ""
             echo "用法:"
-            echo "  curl -fsSL https://xxx/install.sh | bash                   # 安装稳定版"
-            echo "  curl -fsSL https://xxx/install.sh | bash -s -- --nightly   # 安装最新版"
-            echo "  curl -fsSL https://xxx/install.sh | bash -s -- --shengsuanyun-key sk-xxx  # 安装并配置胜算云"
+            echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash                   # 安装稳定版"
+            echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash -s -- --nightly   # 安装最新版"
             echo ""
             echo "选项:"
-            echo "  --nightly              安装最新版（每小时自动构建，追踪上游最新代码）"
-            echo "  --shengsuanyun-key KEY 安装后自动配置胜算云 API（跳过交互式初始化）"
+            echo "  --nightly              安装最新版（每 4 小时自动构建，追踪上游最新代码）"
             echo "  --help                 显示帮助信息"
             echo ""
             echo "版本说明:"
             echo "  稳定版 (@latest)   手动发布，经过测试，推荐生产使用"
-            echo "  最新版 (@nightly)  每小时自动构建，追踪上游，适合测试"
+            echo "  最新版 (@nightly)  每 4 小时自动构建，追踪上游，适合测试"
             echo ""
-            echo "胜算云快速配置:"
-            echo "  获取 API 密钥: https://shengsuanyun.com"
-            echo "  新用户福利: 注册送 10 元体验金！"
             exit 0
             ;;
         *)
@@ -77,10 +64,7 @@ print_banner() {
     echo "╔═══════════════════════════════════════════════════════════╗"
     echo "║                                                           ║"
     echo "║     🦞 OpenClaw 汉化发行版                                ║"
-    echo "║        开源个人 AI 助手平台                              ║"
-    echo "║                                                           ║"
-    echo "║     武汉晴辰天下网络科技有限公司                          ║"
-    echo "║     https://openclaw.qt.cool/                             ║"
+    echo "║        开源个人 AI 助手平台                                ║"
     echo "║                                                           ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
@@ -146,7 +130,7 @@ install_chinese() {
     echo -e "${BLUE}📦 正在安装 OpenClaw 汉化版 [${VERSION_NAME}]...${NC}"
     echo ""
     
-    npm install -g @qingchencloud/openclaw-zh@${NPM_TAG}
+    npm install -g @coryrowe/openclaw-zh@${NPM_TAG}
     
     echo ""
     echo -e "${GREEN}✓${NC} 安装完成！"
@@ -165,33 +149,6 @@ run_setup_if_needed() {
     # 用户明确跳过
     if [ "$OPENCLAW_SKIP_SETUP" = "1" ]; then
         echo -e "${YELLOW}⚠${NC} OPENCLAW_SKIP_SETUP=1，跳过自动初始化"
-        return 0
-    fi
-    
-    # 如果提供了胜算云 Key，执行胜算云专属非交互式 onboard
-    if [ -n "$SHENGSUANYUN_KEY" ]; then
-        echo ""
-        echo -e "${BLUE}🔧 正在配置胜算云...${NC}"
-        echo ""
-        
-        if openclaw onboard --non-interactive \
-            --auth-choice shengsuanyun-api-key \
-            --shengsuanyun-api-key "$SHENGSUANYUN_KEY" \
-            --accept-risk 2>/dev/null; then
-            echo -e "${GREEN}✓${NC} 胜算云配置完成！"
-        else
-            # 降级：设置环境变量后重试
-            export SHENGSUANYUN_API_KEY="$SHENGSUANYUN_KEY"
-            if openclaw onboard --non-interactive \
-                --auth-choice shengsuanyun-api-key \
-                --accept-risk 2>/dev/null; then
-                echo -e "${GREEN}✓${NC} 胜算云配置完成（环境变量模式）！"
-            else
-                echo -e "${YELLOW}⚠${NC} 胜算云自动配置失败，请手动运行:"
-                echo "   openclaw onboard"
-                echo "   然后在认证选项中选择 '胜算云 API 密钥'"
-            fi
-        fi
         return 0
     fi
     
@@ -227,7 +184,7 @@ print_success() {
     echo ""
     if [ "$INSTALL_NIGHTLY" = true ]; then
         echo -e "${YELLOW}⚠  提示：您安装的是最新版，追踪上游最新代码，可能不够稳定。${NC}"
-        echo -e "${YELLOW}   切换到稳定版：npm install -g @qingchencloud/openclaw-zh@latest${NC}"
+        echo -e "${YELLOW}   切换到稳定版：npm install -g @coryrowe/openclaw-zh@latest${NC}"
         echo ""
     fi
     echo -e "${CYAN}🚀 快速开始：${NC}"
@@ -255,9 +212,7 @@ print_success() {
     echo ""
     echo -e "${CYAN}📚 更多信息：${NC}"
     echo ""
-    echo "   汉化官网: https://openclaw.qt.cool/"
     echo "   原版官网: https://openclaw.ai/"
-    echo "   GitHub:   https://github.com/1186258278/OpenClawChineseTranslation"
     echo ""
 }
 
