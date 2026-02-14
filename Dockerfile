@@ -45,6 +45,9 @@ COPY package.json package-lock.json* pnpm-lock.yaml* ./
 # 复制所有构建好的代码
 COPY . .
 
+# 安装 pnpm（某些包可能需要 pnpm 进行构建）
+RUN npm install -g pnpm
+
 # 重新安装原生依赖以匹配当前架构（使用 cache-mount 加速 npm）
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
     npm rebuild || true && \
