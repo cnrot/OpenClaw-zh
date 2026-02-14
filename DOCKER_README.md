@@ -2,7 +2,7 @@
  * @Author: cnrot
  * @Date: 2026-02-14 00:53:54
  * @LastEditors: Rowe inetech@zohomail.com
- * @LastEditTime: 2026-02-14 23:09:22
+ * @LastEditTime: 2026-02-14 23:34:46
  * @FilePath: \OpenClaw-zh\DOCKER_README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -56,12 +56,12 @@ volumes:
   openclaw-data:
 ```
 
-## 镜像地址
+## 镜像
 
 | 镜像源 | 地址 | 适用场景 |
 |--------|------|----------|
-| **Docker Hub** | `coryrowe/openclaw-zh` | 国内用户推荐 |
-| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` | 海外用户 |
+| **Docker Hub** | `coryrowe/openclaw-zh` |
+| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` |
 
 ## 相关链接
 

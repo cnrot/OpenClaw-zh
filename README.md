@@ -10,7 +10,7 @@
 
 ---
 
-## OpenClaw？
+## 介绍
 
 [OpenClaw](https://openclaw.ai/) 是 **适用于任何操作系统的 AI 智能体 Gateway 网关**。它运行在你的电脑上，通过 WhatsApp、Telegram、Discord 等聊天应用与你的 AI 助手交互，帮你处理邮件、日历、文件等日常事务。
 
@@ -208,7 +208,7 @@ npm update -g @coryrowe/openclaw-zh
 
 ## Docker 部署
 
-> **国内用户强烈推荐使用 Docker Hub 镜像**，拉取速度快，无需翻墙！
+> **推荐使用 Docker Hub 镜像**，拉取速度快，无需翻墙！
 
 | 镜像源 | 拉取命令 | 适用 |
 |--------|----------|------|
@@ -339,7 +339,7 @@ npx @coryrowe/openclaw-zh@latest
 # 方案 1：npm 加镜像源
 npm install -g @coryrowe/openclaw-zh@latest --registry=https://registry.npmmirror.com
 
-# 方案 2：用 Docker（国内最快）
+# 方案 2：用 Docker
 docker pull coryrowe/openclaw-zh:latest
 ```
 

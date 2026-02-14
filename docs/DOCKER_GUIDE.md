@@ -35,7 +35,7 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 
 ---
 
-## 镜像地址
+## 镜像
 
 | 镜像源 | 地址 | 适用场景 |
 |--------|------|----------|
@@ -51,9 +51,8 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 适用于在本机运行并通过 `localhost` 访问：
 
 ```bash
-# 镜像地址（推荐使用 coryrowe/openclaw-zh:latest）
 # ghcr.io/cnrot/openclaw-zh:latest
-# coryrowe/openclaw-zh:latest
+# coryrowe/openclaw-zh:latest（推荐使用）
 IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 初始化配置（首次运行，需要交互式配置 AI 模型和 API 密钥）
@@ -100,9 +99,8 @@ docker run -d --name openclaw -p 18789:18789 -v openclaw-data:/root/.openclaw --
 部署到服务器并从其他设备访问时，需要额外配置：
 
 ```bash
-# 镜像地址（推荐 coryrowe/openclaw-zh:latest）
 # ghcr.io/cnrot/openclaw-zh:latest
-# coryrowe/openclaw-zh:latest
+# coryrowe/openclaw-zh:latest（推荐使用）
 IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 创建数据卷
@@ -393,9 +391,8 @@ docker system prune -a --volumes
 ## 更新 Docker 镜像
 
 ```bash
-# 镜像地址（国内用户推荐 Docker Hub）
-# 海外: ghcr.io/cnrot/openclaw-zh:latest
-# 国内: coryrowe/openclaw-zh:latest
+# ghcr.io/cnrot/openclaw-zh:latest
+# coryrowe/openclaw-zh:latest
 IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 拉取最新镜像
