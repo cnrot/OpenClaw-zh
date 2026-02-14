@@ -103,7 +103,7 @@ jobs:
         id: apply
         run: |
           # 运行汉化并捕获输出
-          OUTPUT=$(node cli/index.mjs apply --verbose 2>&amp;1) || true
+          OUTPUT=$(node cli/index.mjs apply --verbose 2>&1) || true
           echo "$OUTPUT"
           
           # 从机器可读的统计行提取数据（格式: ##STATS##applied=N|existed=N|failed=N##）
@@ -120,10 +120,10 @@ jobs:
           FILES_COUNT=$(echo "$CLEAN" | grep -c "^  替换:" || echo "0")
           
           # 确保所有值都是纯数字，防止写入 GITHUB_OUTPUT 时出错
-          [[ ! "$APPLIED" =~ ^[0-9]+$ ]] &amp;&amp; APPLIED="0"
-          [[ ! "$EXISTED" =~ ^[0-9]+$ ]] &amp;&amp; EXISTED="0"
-          [[ ! "$FAILED" =~ ^[0-9]+$ ]] &amp;&amp; FAILED="0"
-          [[ ! "$FILES_COUNT" =~ ^[0-9]+$ ]] &amp;&amp; FILES_COUNT="0"
+          [[ ! "$APPLIED" =~ ^[0-9]+$ ]] && APPLIED="0"
+          [[ ! "$EXISTED" =~ ^[0-9]+$ ]] && EXISTED="0"
+          [[ ! "$FAILED" =~ ^[0-9]+$ ]] && FAILED="0"
+          [[ ! "$FILES_COUNT" =~ ^[0-9]+$ ]] && FILES_COUNT="0"
           
           echo "applied=$APPLIED" >> $GITHUB_OUTPUT
           echo "existed=$EXISTED" >> $GITHUB_OUTPUT
@@ -205,7 +205,7 @@ jobs:
           JS_FILE=""
           if [ -f openclaw/dist/canvas-host/a2ui/a2ui.bundle.js ]; then
             JS_FILE="openclaw/dist/canvas-host/a2ui/a2ui.bundle.js"
-          elif ls openclaw/dist/control-ui/assets/index-*.js 1>/dev/null 2>&amp;1; then
+          elif ls openclaw/dist/control-ui/assets/index-*.js 1>/dev/null 2>&1; then
             JS_FILE=$(ls openclaw/dist/control-ui/assets/index-*.js | head -1)
           fi
           
@@ -240,12 +240,12 @@ jobs:
           
           # 修改包信息
           if [ "$VERSION_TYPE" = "nightly" ]; then
-            jq '.description = "OpenClaw 汉化发行版 (Nightly)"' package.json > tmp.json &amp;&amp; mv tmp.json package.json
+            jq '.description = "OpenClaw 汉化发行版 (Nightly)"' package.json > tmp.json && mv tmp.json package.json
           else
-            jq '.description = "OpenClaw 汉化发行版（稳定版）"' package.json > tmp.json &amp;&amp; mv tmp.json package.json
+            jq '.description = "OpenClaw 汉化发行版（稳定版）"' package.json > tmp.json && mv tmp.json package.json
           fi
           
-          jq '.name = "@coryrowe/openclaw-zh"' package.json > tmp.json &amp;&amp; mv tmp.json package.json
+          jq '.name = "@coryrowe/openclaw-zh"' package.json > tmp.json && mv tmp.json package.json
           
           # 使用中文 README
           cp ../README.md ./README.md
