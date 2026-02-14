@@ -210,8 +210,8 @@ npm update -g @coryrowe/openclaw-zh
 
 > **推荐使用 Docker Hub 镜像**，拉取速度快，无需翻墙！
 
-| 镜像源 | 拉取命令 | 适用 |
-|--------|----------|------|
+| 镜像源 | 拉取命令 |
+|--------|----------|
 | **Docker Hub** | `docker pull coryrowe/openclaw-zh:latest` |
 | GitHub Container Registry | `docker pull ghcr.io/cnrot/openclaw-zh:latest` |
 

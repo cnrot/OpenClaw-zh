@@ -37,8 +37,8 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 
 ## 镜像
 
-| 镜像源 | 地址 | 适用场景 |
-|--------|------|----------|
+| 镜像源 | 地址 |
+|--------|------|
 | **Docker Hub** | `coryrowe/openclaw-zh` |
 | **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` |
 
