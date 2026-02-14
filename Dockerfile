@@ -29,12 +29,12 @@ ENV NODE_ENV=production
 # 这一层变化频率低，会被缓存
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update &amp;&amp; apt-get install -y --no-install-recommends \
+    apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     ca-certificates \
     chromium \
-    &amp;&amp; rm -rf /tmp/*
+    && rm -rf /tmp/*
 
 # 设置工作目录
 WORKDIR /app
@@ -47,7 +47,7 @@ COPY . .
 
 # 重新安装原生依赖以匹配当前架构（使用 cache-mount 加速 npm）
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
-    npm rebuild || true &amp;&amp; \
+    npm rebuild || true && \
     npm install --prefer-offline --no-audit --omit=dev || true
 
 # 全局安装
