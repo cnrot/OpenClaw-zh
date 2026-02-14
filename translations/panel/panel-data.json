@@ -71,6 +71,7 @@
       "answer": "npm 环境：\n```\nnpm update -g @coryrowe/openclaw-zh\n```\n\nDocker 环境：\n```\ndocker pull coryrowe/openclaw-zh:latest\ndocker stop openclaw && docker rm openclaw\n# 重新启动容器\n```"
     }
   ],
+  "plugins": [],
   "about": {
     "project": "OpenClaw 汉化发行版",
     "website": "",
