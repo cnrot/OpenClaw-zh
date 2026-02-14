@@ -26,8 +26,6 @@
 
     "\"Clear the model allowlist? (shows all models)\"": "\"清除模型允许列表？（将显示所有模型）\"",
 
-    "hint: `${count} model${count === 1 ? \"\" : \"s\"}`": "hint: `${count} 个模型`",
-
-    "label: provider,": "label: provider === \"shengsuanyun\" ? \"胜算云\" : provider,"
+    "hint: `${count} model${count === 1 ? \"\" : \"s\"}`": "hint: `${count} 个模型`"
   }
 }

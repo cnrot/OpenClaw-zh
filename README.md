@@ -10,11 +10,11 @@
 
 ---
 
-## 什么是 OpenClaw？
+## OpenClaw？
 
-[OpenClaw](https://openclaw.ai/) 是 GitHub 100,000+ Stars 的**开源个人 AI 助手平台**。它运行在你的电脑上，通过 WhatsApp、Telegram、Discord 等聊天应用与你的 AI 助手交互，帮你处理邮件、日历、文件等日常事务。
+[OpenClaw](https://openclaw.ai/) 是 **适用于任何操作系统的 AI 智能体 Gateway 网关**。它运行在你的电脑上，通过 WhatsApp、Telegram、Discord 等聊天应用与你的 AI 助手交互，帮你处理邮件、日历、文件等日常事务。
 
-**本项目 = OpenClaw + 全中文界面**，CLI 命令行和 Dashboard 网页控制台均已深度汉化。
+**本项目 = OpenClaw + 中文界面**，CLI 命令行和 Dashboard 网页控制台均已深度汉化。
 
 ---
 
@@ -201,19 +201,19 @@ npm update -g @coryrowe/openclaw-zh
 
 | 版本 | 安装命令 | 说明 |
 |------|----------|------|
-| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | 经过测试，推荐使用 |
-| **最新版** | `npm install -g @coryrowe/openclaw-zh@nightly` | 每 4 小时同步上游，体验新功能 |
+| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | 推荐使用 |
+| **最新版** | `npm install -g @coryrowe/openclaw-zh@nightly` | 体验新功能 |
 
 ---
 
-## Docker 部署（国内推荐）
+## Docker 部署
 
 > **国内用户强烈推荐使用 Docker Hub 镜像**，拉取速度快，无需翻墙！
 
 | 镜像源 | 拉取命令 | 适用 |
 |--------|----------|------|
-| **Docker Hub（国内推荐）** | `docker pull coryrowe/openclaw-zh:latest` | 国内用户 |
-| GitHub Container Registry | `docker pull ghcr.io/cnrot/openclaw-zh:latest` | 海外用户 |
+| **Docker Hub** | `docker pull coryrowe/openclaw-zh:latest` |
+| GitHub Container Registry | `docker pull ghcr.io/cnrot/openclaw-zh:latest` |
 
 ### 一键部署（最简单）
 
@@ -231,9 +231,9 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 ### 手动 Docker 部署
 
 ```bash
-# 国内用户使用 Docker Hub 镜像
+# 推荐使用 Docker Hub 镜像
 IMAGE=coryrowe/openclaw-zh:latest
-# 海外用户使用: IMAGE=ghcr.io/cnrot/openclaw-zh:latest
+# 海外使用: IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 初始化（首次运行）
 # Docker 需要交互式运行来配置 AI 模型和 API 密钥
@@ -411,8 +411,6 @@ docker run --rm -v openclaw-data:/root/.openclaw \
 # 安装更新检测插件
 npm install -g @coryrowe/openclaw-updater
 ```
-
-访问 [插件市场](https://github.com/VoltAgent/awesome-openclaw-skills) 获取更多插件。
 
 ---
 

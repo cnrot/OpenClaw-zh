@@ -2,7 +2,7 @@
 # ============================================================
 # OpenClaw 汉化发行版 - 一键安装脚本
 # 
-# OpenClaw: 开源个人 AI 助手平台
+# OpenClaw: 开源 AI 智能体
 # 官方网站: https://openclaw.ai/
 #
 # 用法:
@@ -64,7 +64,7 @@ print_banner() {
     echo "╔═══════════════════════════════════════════════════════════╗"
     echo "║                                                           ║"
     echo "║     🦞 OpenClaw 汉化发行版                                ║"
-    echo "║        开源个人 AI 助手平台                                ║"
+    echo "║        开源 AI 智能体                                ║"
     echo "║                                                           ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
@@ -196,7 +196,7 @@ print_success() {
     echo ""
     echo -e "${CYAN}💡 OpenClaw 是什么？${NC}"
     echo ""
-    echo "   开源个人 AI 助手平台，可通过 WhatsApp/Telegram/Discord 等"
+    echo "   开源 AI 智能体，可通过 WhatsApp/Telegram/Discord 等"
     echo "   聊天应用与你的 AI 助手交互，管理邮件、日历、文件等一切事务。"
     echo ""
     echo -e "${YELLOW}⚠️  远程访问常见问题：${NC}"

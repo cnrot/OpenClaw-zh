@@ -1,7 +1,7 @@
 # ============================================================
 # OpenClaw 汉化发行版 - Windows 一键安装脚本
 # 
-# OpenClaw: 开源个人 AI 助手平台
+# OpenClaw: 开源 AI 智能体
 # 官方网站: https://openclaw.ai/
 #
 # 用法:
@@ -49,7 +49,7 @@ function Show-Banner {
     Write-Host "╔═══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "║     🦞 OpenClaw 汉化发行版                                ║" -ForegroundColor Cyan
-    Write-Host "║        开源个人 AI 助手平台                                ║" -ForegroundColor Cyan
+    Write-Host "║        开源 AI 智能体                                ║" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "╚═══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
@@ -194,7 +194,7 @@ function Show-Success {
     Write-Host ""
     Write-Host "💡 OpenClaw 是什么？" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "   开源个人 AI 助手平台，可通过 WhatsApp/Telegram/Discord 等"
+    Write-Host "   开源 AI 智能体，可通过 WhatsApp/Telegram/Discord 等"
     Write-Host "   聊天应用与你的 AI 助手交互，管理邮件、日历、文件等一切事务。"
     Write-Host ""
     Write-Host "⚠️  远程访问常见问题：" -ForegroundColor Yellow

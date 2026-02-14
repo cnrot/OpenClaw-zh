@@ -93,20 +93,6 @@
       "extensions/voice-call.json",
       "extensions/voice-call-cli.json"
     ],
-    "providers": [
-      "providers/shengsuanyun-files.json",
-      "providers/shengsuanyun-tools-registry.json",
-      "providers/shengsuanyun-gateway-preload.json",
-      "providers/shengsuanyun-provider.json",
-      "providers/shengsuanyun-auth.json",
-      "providers/shengsuanyun-onboard-types.json",
-      "providers/shengsuanyun-config-core.json",
-      "providers/shengsuanyun-credentials.json",
-      "providers/shengsuanyun-exports.json",
-      "providers/shengsuanyun-inference.json",
-      "providers/shengsuanyun-noninteractive.json",
-      "providers/shengsuanyun-choice.json",
-      "providers/shengsuanyun-apply.json"
-    ]
+    "providers": []
   }
 }

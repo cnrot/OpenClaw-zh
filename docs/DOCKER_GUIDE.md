@@ -39,10 +39,10 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 
 | 镜像源 | 地址 | 适用场景 |
 |--------|------|----------|
-| **Docker Hub** | `coryrowe/openclaw-zh` | **国内用户推荐**，速度快 |
-| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` | 海外用户 / 默认 |
+| **Docker Hub** | `coryrowe/openclaw-zh` |
+| **ghcr.io** | `ghcr.io/cnrot/openclaw-zh` |
 
-> 以下命令默认使用 ghcr.io 地址。**国内用户**将 `ghcr.io/cnrot/openclaw-zh` 替换为 `coryrowe/openclaw-zh` 即可加速。
+> 以下命令默认使用 ghcr.io 地址。推荐将 `ghcr.io/cnrot/openclaw-zh` 替换为 `coryrowe/openclaw-zh` 。
 
 ---
 
@@ -51,9 +51,9 @@ irm https://cdn.jsdelivr.net/gh/cnrot/OpenClaw-zh@main/docker-deploy.ps1 | iex
 适用于在本机运行并通过 `localhost` 访问：
 
 ```bash
-# 镜像地址（国内用户推荐使用 Docker Hub 加速）
-# 海外: ghcr.io/cnrot/openclaw-zh:latest
-# 国内: coryrowe/openclaw-zh:latest
+# 镜像地址（推荐使用 coryrowe/openclaw-zh:latest）
+# ghcr.io/cnrot/openclaw-zh:latest
+# coryrowe/openclaw-zh:latest
 IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 初始化配置（首次运行，需要交互式配置 AI 模型和 API 密钥）
@@ -100,9 +100,9 @@ docker run -d --name openclaw -p 18789:18789 -v openclaw-data:/root/.openclaw --
 部署到服务器并从其他设备访问时，需要额外配置：
 
 ```bash
-# 镜像地址（国内服务器推荐 Docker Hub）
-# 海外: ghcr.io/cnrot/openclaw-zh:latest
-# 国内: coryrowe/openclaw-zh:latest
+# 镜像地址（推荐 coryrowe/openclaw-zh:latest）
+# ghcr.io/cnrot/openclaw-zh:latest
+# coryrowe/openclaw-zh:latest
 IMAGE=ghcr.io/cnrot/openclaw-zh:latest
 
 # 1. 创建数据卷
@@ -282,8 +282,7 @@ docker-compose up -d
 version: '3.8'
 services:
   openclaw:
-    # 国内用户可替换为: coryrowe/openclaw-zh:latest
-    image: ghcr.io/cnrot/openclaw-zh:latest
+    image: cnrot/openclaw-zh:latest
     container_name: openclaw
     ports:
       - "18789:18789"

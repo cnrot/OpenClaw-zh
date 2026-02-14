@@ -8,8 +8,6 @@ const hasLF = c.includes('\n');
 console.log('换行符类型:', hasCRLF ? 'CRLF (\\r\\n)' : 'LF (\\n)');
 
 // 检查关键文本
-console.log('has shengsuanyun:', c.includes('shengsuanyun'));
-console.log('has 胜算云:', c.includes('胜算云'));
 console.log('has Together AI API key:', c.includes('Together AI API key'));
 console.log('has venice:', c.includes('venice'));
 
@@ -28,7 +26,7 @@ console.log('anchor2 (CRLF):', c.includes(anchor2_crlf));
 // 打印 Together AI 附近的行
 const lines = c.split(/\r?\n/);
 lines.forEach((l, i) => {
-  if (l.includes('Together') || l.includes('venice') || l.includes('shengsuanyun')) {
+  if (l.includes('Together') || l.includes('venice')) {
     console.log(`${i + 1}: ${l.trim()}`);
   }
 });

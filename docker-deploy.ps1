@@ -56,7 +56,7 @@ function Show-Banner {
     Write-Host "╔═══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "║     🦞 OpenClaw 汉化发行版 - Docker 部署                  ║" -ForegroundColor Cyan
-    Write-Host "║        开源个人 AI 助手平台                              ║" -ForegroundColor Cyan
+    Write-Host "║        开源 AI 智能体                              ║" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "╚═══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""

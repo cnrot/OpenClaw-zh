@@ -1,14 +1,14 @@
 <!--
  * @Author: cnrot
  * @Date: 2026-02-14 00:53:54
- * @LastEditors: cnrot
- * @LastEditTime: 2026-02-14 02:55:35
+ * @LastEditors: Rowe inetech@zohomail.com
+ * @LastEditTime: 2026-02-14 23:09:22
  * @FilePath: \OpenClaw-zh\DOCKER_README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 # OpenClaw 汉化发行版 - Docker 镜像
 
-> OpenClaw (Clawdbot/Moltbot) 中文汉化版，CLI 和 Dashboard 均已深度汉化，每 4 小时自动同步上游官方更新。
+> OpenClaw (Clawdbot/Moltbot) 中文汉化版，CLI 和 Dashboard 深度汉化，每 4 小时自动同步上游官方更新。
 
 ## 快速启动
 

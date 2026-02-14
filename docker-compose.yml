@@ -7,15 +7,14 @@
 # 首次运行会自动初始化配置。
 # 远程访问请参考 README.md 中的配置说明。
 #
-# 官方网站: https://openclaw.ai/
+# Docker 部署指南: https://github.com/cnrot/OpenClaw-zh/blob/main/docs/DOCKER_GUIDE.md
 # ============================================================
 
 version: '3.8'
 
 services:
   openclaw:
-    # 国内用户可替换为: coryrowe/openclaw-zh:nightly（Docker Hub 加速）
-    image: ghcr.io/cnrot/openclaw-zh:nightly
+    image: cnrot/openclaw-zh:latest
     container_name: openclaw
     ports:
       - "18789:18789"

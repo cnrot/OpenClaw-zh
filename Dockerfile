@@ -16,7 +16,7 @@
 FROM node:22-slim
 
 LABEL org.opencontainers.image.source="https://github.com/cnrot/OpenClaw-zh"
-LABEL org.opencontainers.image.description="OpenClaw 汉化发行版 - 开源个人 AI 助手中文版"
+LABEL org.opencontainers.image.description="OpenClaw 汉化发行版 - 开源 AI 智能体"
 LABEL org.opencontainers.image.licenses="MIT"
 
 # 设置环境变量（这一层很少变化，放最前面）

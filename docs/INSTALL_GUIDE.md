@@ -502,7 +502,6 @@ openclaw
 | `ZAI_API_KEY` | 智谱 GLM |
 | `MINIMAX_API_KEY` | MiniMax |
 | `XIAOMI_API_KEY` | 小米 MiMo |
-| `SHENGSUANYUN_API_KEY` | 胜算云（聚合平台） |
 
 ---
 
