@@ -40,7 +40,7 @@
 
   // API 配置
   const API_BASE = 'https://qt.cool/api/v1';
-  const PROJECT_SLUG = 'openclawchinesetranslation';
+  const GITHUB_REPO = 'cnrot/OpenClaw-zh';
   const CACHE_DURATION = 5 * 60 * 1000; // 5 分钟缓存
 
   // 缓存对象
@@ -87,7 +87,7 @@
     }
   }
 
-  // 从 API 获取更新日志
+  // 从 GitHub API 获取本项目的更新日志
   async function fetchChangelogFromAPI() {
     const now = Date.now();
     // 检查缓存（更新日志缓存 30 分钟）
@@ -96,17 +96,35 @@
     }
     
     try {
-      const response = await fetch(`${API_BASE}/project/${PROJECT_SLUG}/changelog`);
-      const data = await response.json();
-      if (data.success && data.data) {
-        // 更新缓存
-        apiCache.changelog.data = data.data;
-        apiCache.changelog.timestamp = now;
-        return data.data;
+      // 使用 GitHub API 获取本项目的提交历史
+      const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?per_page=10`);
+      if (!response.ok) {
+        throw new Error('GitHub API 请求失败');
       }
-      throw new Error(data.error || '获取更新日志失败');
+      const commits = await response.json();
+      
+      // 转换 GitHub 提交数据为面板需要的格式
+      const formattedCommits = commits.map(commit => ({
+        message: commit.commit.message.split('\n')[0], // 只取第一行作为标题
+        author: commit.author?.login || commit.commit.author?.name || 'Unknown',
+        date: commit.commit.author?.date,
+        short_sha: commit.sha.substring(0, 7),
+        url: commit.html_url,
+        avatar_url: commit.author?.avatar_url || null
+      }));
+      
+      const changelogData = {
+        commits: formattedCommits,
+        repo_url: `https://github.com/${GITHUB_REPO}`,
+        is_public: true
+      };
+      
+      // 更新缓存
+      apiCache.changelog.data = changelogData;
+      apiCache.changelog.timestamp = now;
+      return changelogData;
     } catch (err) {
-      console.warn('[功能面板] 更新日志 API 请求失败:', err.message);
+      console.warn('[功能面板] 更新日志获取失败:', err.message);
       return null;
     }
   }

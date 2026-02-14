@@ -5,7 +5,7 @@
     "<div class=\"brand\">": "<a class=\"brand\" href=\"https://github.com/cnrot/OpenClaw-zh\" target=\"_blank\" rel=\"noreferrer\" title=\"访问 GitHub 仓库\" style=\"text-decoration: none; color: inherit;\">",
     "</div>\n          </div>\n        </div>\n        <div class=\"topbar-status\">": "</div>\n          </a>\n        </div>\n        <div class=\"topbar-status\">",
     "<div class=\"brand-title\">OPENCLAW</div>": "<div class=\"brand-title\">OpenClaw</div>",
-    "<div class=\"brand-sub\">Gateway Dashboard</div>": "<div class=\"brand-sub\">网关控制台 · 点击访问仓库</div>",
+    "<div class=\"brand-sub\">Gateway Dashboard</div>": "<div class=\"brand-sub\">网关控制台 · 访问项目</div>",
     "<span>Health</span>": "<span>健康状态</span>",
     "<span class=\"mono\">${state.connected ? \"OK\" : \"Offline\"}</span>": "<span class=\"mono\">${state.connected ? \"正常\" : \"离线\"}</span>",
     "title=\"${state.settings.navCollapsed ? \"Expand sidebar\" : \"Collapse sidebar\"}\"": "title=\"${state.settings.navCollapsed ? \"展开侧栏\" : \"收起侧栏\"}\"",

@@ -325,7 +325,7 @@ print_success() {
     
     echo -e "${CYAN}📚 更多信息：${NC}"
     echo ""
-    echo "   文档:     https://docs.openclaw.ai/"
+    echo "   文档:     https://docs.openclaw.ai/zh-CN"
     echo "   GitHub:   https://github.com/cnrot/OpenClaw-zh"
     echo ""
 }

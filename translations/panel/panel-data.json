@@ -74,6 +74,7 @@
   "plugins": [],
   "about": {
     "project": "OpenClaw 汉化发行版",
+    "company": "OpenClaw 社区",
     "website": "",
     "github": "https://github.com/cnrot/OpenClaw-zh",
     "npm": "https://www.npmjs.com/package/@coryrowe/openclaw-zh",

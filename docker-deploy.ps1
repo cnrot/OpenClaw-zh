@@ -305,7 +305,7 @@ function Show-Success {
     
     Write-Host "📚 更多信息：" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "   文档:     https://docs.openclaw.ai/"
+    Write-Host "   文档:     https://docs.openclaw.ai/zh-CN"
     Write-Host "   GitHub:   https://github.com/cnrot/OpenClaw-zh"
     Write-Host ""
 }
