@@ -23,7 +23,7 @@ $ErrorActionPreference = "Stop"
 
 # 默认配置
 $VolumeName = "openclaw-data"
-$Image = "coryrowe/openclaw-zh:nightly"
+$Image = "ghcr.io/cnrot/openclaw-zh:nightly"
 
 # 帮助信息
 if ($Help) {
