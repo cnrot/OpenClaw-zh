@@ -70,4 +70,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:18789/health || exit 1
 
 # 默认启动命令
-CMD ["openclaw"]
+CMD ["node", "openclaw.mjs", "gateway", "--allow-unconfigured"]
