@@ -36,6 +36,23 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     chromium \
     && rm -rf /tmp/*
 
+# 设置环境变量（这一层很少变化，放最前面）
+ENV CHROME_BIN=/usr/bin/chromium
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV NODE_ENV=production
+
+# 安装运行时依赖（使用 cache-mount 加速 apt）
+# 这一层变化频率低，会被缓存
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    curl \
+    ca-certificates \
+    chromium \
+    && rm -rf /tmp/*
+
 # 设置工作目录
 WORKDIR /app
 
@@ -44,9 +61,6 @@ COPY package.json package-lock.json* pnpm-lock.yaml* ./
 
 # 复制所有构建好的代码
 COPY . .
-
-# 安装 pnpm（某些包可能需要 pnpm 进行构建）
-RUN npm install -g pnpm
 
 # 重新安装原生依赖以匹配当前架构（使用 cache-mount 加速 npm）
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
@@ -70,4 +84,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:18789/health || exit 1
 
 # 默认启动命令
-CMD ["node", "openclaw.mjs", "gateway", "--allow-unconfigured"]
+CMD ["openclaw"]
