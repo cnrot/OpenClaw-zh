@@ -325,6 +325,41 @@ npx @coryrowe/openclaw-zh@latest
 
 ---
 
+## 📱 手机端 — ClawApp
+
+> **想用手机和 AI 智能体聊天？** [ClawApp](https://github.com/qingchencloud/clawapp) 是 OpenClaw 的移动端 H5 聊天客户端，打开浏览器就能用，不需要装 App。
+
+OpenClaw Gateway 默认只监听本机（`127.0.0.1:18789`），手机无法直接连接。ClawApp 通过 WebSocket 代理解决了这个问题：
+
+```
+手机浏览器（任意网络）
+    ↓ WebSocket (WS / WSS)
+ClawApp 代理服务端（端口 3210）
+    ↓ WebSocket (localhost)
+OpenClaw Gateway（端口 18789）
+```
+
+**核心特性**：实时流式聊天 · 图片发送 · Markdown 渲染 + 代码高亮 · 快捷指令 · 会话管理 · 暗色/亮色主题 · 中英文切换 · PWA 支持 · Android APK
+
+**快速部署**（Docker 一键启动）：
+
+```bash
+git clone https://github.com/qingchencloud/clawapp.git
+cd clawapp
+
+# 创建 .env，填入你的 Token
+echo 'PROXY_TOKEN=设置一个连接密码' > .env
+echo 'OPENCLAW_GATEWAY_TOKEN=你的gateway-token' >> .env
+
+docker compose up -d --build
+```
+
+手机浏览器打开 `http://你的电脑IP:3210` 即可使用。
+
+> 详细文档（外网访问、Cloudflare Tunnel、Nginx 反代等）请查看 **[ClawApp 项目主页](https://github.com/qingchencloud/clawapp)** | **[产品官网](https://clawapp.qt.cool/)**
+
+---
+
 ## 常见问题
 
 ### 🔥 Top 3 高频问题
@@ -394,6 +429,7 @@ docker run --rm -v openclaw-data:/root/.openclaw \
 
 | 问题 | 快速解决 | 详情 |
 |------|----------|------|
+| **安装报 `Permission denied (publickey)`** | `git config --global url."https://github.com/".insteadOf ssh://git@github.com/` | [查看 →](docs/FAQ.md#安装报错-permission-denied-publickey--git-error-code-128) |
 | **远程 / 内网访问不了** | `openclaw config set gateway.bind lan` 然后重启 | [查看 →](docs/FAQ.md#npm-安装后内网其他电脑无法访问) |
 | **镜像源版本落后** | 去掉 `--registry` 参数直接安装，或等待镜像同步（已自动触发） | [#32](https://github.com/1186258278/OpenClawChineseTranslation/issues/32) |
 | **`Missing config`** | 运行 `openclaw onboard` 初始化配置 | [查看 →](docs/FAQ.md#missing-config-run-openclaw-setup) |
