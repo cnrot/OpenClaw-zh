@@ -20,7 +20,12 @@ on:
   schedule:
     # 每小时的第 15 分钟运行，检查上游更新
     - cron: '15 * * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '手动指定上游 OpenClaw 的版本标签 (例如 v0.25.1)，如果留空则自动获取最新稳定版'
+        required: false
+        default: ''
 
 env:
   UPSTREAM_REPO: openclaw/openclaw
@@ -38,19 +43,28 @@ jobs:
       should_run: ${{ steps.check.outputs.should_run }}
       upstream_tag: ${{ steps.check.outputs.upstream_tag }}
     steps:
-      - name: 获取上游最新 Release Tag
+      - name: 确定上游版本标签
         id: get_upstream_tag
         run: |
-          LATEST_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
-          
+          MANUAL_VERSION="${{ github.event.inputs.version }}"
+          LATEST_UPSTREAM_TAG=""
+
+          if [[ -n "$MANUAL_VERSION" ]]; then
+            echo "💡 手动指定版本: $MANUAL_VERSION"
+            LATEST_UPSTREAM_TAG="$MANUAL_VERSION"
+          else
+            echo "🔄 自动检测最新稳定版..."
+            LATEST_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
+          fi
+
           if [ -z "$LATEST_UPSTREAM_TAG" ] || [ "$LATEST_UPSTREAM_TAG" == "null" ]; then
             echo "::error::无法获取上游 Release Tag"
             exit 1
           fi
-          
+
           echo "upstream_tag=$LATEST_UPSTREAM_TAG" >> $GITHUB_OUTPUT
-          echo "🔎 上游最新 Tag: $LATEST_UPSTREAM_TAG"
+          echo "🔎 最终确定上游 Tag: $LATEST_UPSTREAM_TAG"
 
       - name: 获取我们最新的 Release Tag
         id: get_our_tag
@@ -63,12 +77,21 @@ jobs:
       - name: 比较版本以确定是否继续
         id: check
         run: |
+          # 如果是手动触发，总是运行
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "✅ 手动触发，强制开始构建流程！"
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "upstream_tag=${{ steps.get_upstream_tag.outputs.upstream_tag }}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # --- 以下是定时任务的逻辑 ---
           # 从我们的 tag 中提取基础版本号，例如 v0.25.1-zh.1 -> v0.25.1
           OUR_BASE_TAG=$(echo "${{ steps.get_our_tag.outputs.our_latest_tag }}" | sed -E 's/(-zh\.[0-9]+)$//')
           
           echo "   我们处理过的上游版本: $OUR_BASE_TAG"
           echo "   上游最新稳定版: ${{ steps.get_upstream_tag.outputs.upstream_tag }}"
-
+          
           if [ "${{ steps.get_upstream_tag.outputs.upstream_tag }}" != "$OUR_BASE_TAG" ]; then
             echo "✅ 新的上游版本已发布，开始构建流程！"
             echo "should_run=true" >> $GITHUB_OUTPUT
