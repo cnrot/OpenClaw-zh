@@ -99,21 +99,6 @@
       "extensions/feishu-bitable.json",
       "extensions/voice-call.json",
       "extensions/voice-call-cli.json"
-    ],
-    "providers": [
-      "providers/shengsuanyun-apply.json",
-      "providers/shengsuanyun-auth.json",
-      "providers/shengsuanyun-choice.json",
-      "providers/shengsuanyun-config-core.json",
-      "providers/shengsuanyun-credentials.json",
-      "providers/shengsuanyun-exports.json",
-      "providers/shengsuanyun-files.json",
-      "providers/shengsuanyun-gateway-preload.json",
-      "providers/shengsuanyun-inference.json",
-      "providers/shengsuanyun-noninteractive.json",
-      "providers/shengsuanyun-onboard-types.json",
-      "providers/shengsuanyun-provider.json",
-      "providers/shengsuanyun-tools-registry.json"
     ]
   }
 }
