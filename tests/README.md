@@ -87,7 +87,7 @@ Invoke-ScriptAnalyzer -Path docker-deploy.ps1
 ### install.sh / install.ps1
 
 - [x] 语法验证
-- [x] 参数解析 (`--nightly`, `--help`)
+- [x] 参数解析 (`--help`)
 - [x] Node.js 版本检查
 - [x] npm 可用性检查
 - [x] 原版卸载逻辑

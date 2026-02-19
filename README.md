@@ -2,11 +2,10 @@
 
 [![Release](https://img.shields.io/github/v/release/cnrot/OpenClaw-zh?label=稳定版)](https://github.com/cnrot/OpenClaw-zh/releases)
 [![npm](https://img.shields.io/npm/v/@coryrowe/openclaw-zh?label=npm)](https://www.npmjs.com/package/@coryrowe/openclaw-zh)
-[![Nightly Build](https://github.com/cnrot/OpenClaw-zh/actions/workflows/nightly.yml/badge.svg)](https://github.com/cnrot/OpenClaw-zh/actions/workflows/nightly.yml)
 [![Platform](https://img.shields.io/badge/平台-Windows%20|%20macOS%20|%20Linux-blue)](https://github.com/cnrot/OpenClaw-zh/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> **稳定版 (`@latest`)** 自动同步 OpenClaw 官方**稳定版**，**最新版 (`@nightly`)** 每 4 小时同步官方**最新代码**。
+> **稳定版 (`@latest`)** 自动同步 OpenClaw 官方**稳定版**。
 
 ---
 
@@ -201,8 +200,7 @@ npm update -g @coryrowe/openclaw-zh
 
 | 版本 | 安装命令 | 说明 |
 |------|----------|------|
-| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | **推荐**：同步 OpenClaw 官方**稳定版**，可靠性高。 |
-| **最新版** | `npm install -g @coryrowe/openclaw-zh@nightly` | **尝鲜**：同步 OpenClaw 官方**最新代码**，功能最新。 |
+| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | **推荐**：同步 OpenClaw 官方**稳定版**|
 
 ---
 
@@ -322,6 +320,9 @@ npx @coryrowe/openclaw-zh@latest
 ```
 
 </details>
+
+---
+
 
 ---
 

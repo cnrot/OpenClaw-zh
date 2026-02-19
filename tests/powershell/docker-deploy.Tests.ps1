@@ -115,9 +115,9 @@ Describe "脚本配置" {
         $scriptContent | Should -Match 'ghcr.io/cnrot/openclaw-zh'
     }
     
-    It "脚本使用 nightly 标签" {
+    It "脚本使用 latest 标签" {
         $scriptContent = Get-Content $ScriptPath -Raw
-        $scriptContent | Should -Match 'nightly'
+        $scriptContent | Should -Match 'latest'
     }
 }
 

@@ -1,11 +1,8 @@
 # ============================================================
 # OpenClaw 汉化发行版 - Docker Compose 配置
-# 
+#
 # 快速启动:
 #   docker-compose up -d
-#
-# 首次运行会自动初始化配置。
-# 远程访问请参考 README.md 中的配置说明。
 #
 # Docker 部署指南: https://github.com/cnrot/OpenClaw-zh/blob/main/docs/DOCKER_GUIDE.md
 # ============================================================
@@ -14,7 +11,7 @@ version: '3.8'
 
 services:
   openclaw:
-    image: cnrot/openclaw-zh:latest
+    image: ghcr.io/cnrot/openclaw-zh:latest
     container_name: openclaw
     ports:
       - "18789:18789"
@@ -29,7 +26,7 @@ services:
       # - OPENCLAW_SKIP_SETUP=1
     restart: unless-stopped
     # 默认启动 gateway（首次需要初始化，见下方说明）
-    command: openclaw gateway run --allow-unconfigured
+    command: openclaw gateway run
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:18789/health", "||", "exit", "0"]
       interval: 30s

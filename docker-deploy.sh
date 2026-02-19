@@ -26,7 +26,7 @@ NC='\033[0m' # No Color
 CONTAINER_NAME="openclaw"
 VOLUME_NAME="openclaw-data"
 PORT="18789"
-IMAGE="ghcr.io/cnrot/openclaw-zh:nightly"
+IMAGE="ghcr.io/cnrot/openclaw-zh:latest"
 GATEWAY_TOKEN=""
 LOCAL_ONLY=false
 SKIP_INIT=false
@@ -90,7 +90,7 @@ print_banner() {
     echo "╔═══════════════════════════════════════════════════════════╗"
     echo "║                                                           ║"
     echo "║     🦞 OpenClaw 汉化发行版 - Docker 部署                  ║"
-    echo "║        开源 AI 智能体                              ║"
+    echo "║        开源 AI 智能体                                   ║"
     echo "║                                                           ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"

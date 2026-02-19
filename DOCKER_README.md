@@ -8,7 +8,7 @@
 -->
 # OpenClaw 汉化发行版 - Docker 镜像
 
-> OpenClaw (Clawdbot/Moltbot) 中文汉化版。`latest` 标签同步官方稳定版，`nightly` 标签每 4 小时同步官方最新代码。
+> OpenClaw (Clawdbot/Moltbot) 中文汉化版。`latest` 标签同步官方稳定版。
 
 ## 快速启动
 
@@ -35,7 +35,6 @@ docker run -d --name openclaw -p 18789:18789 \
 | 标签 | 说明 |
 |------|------|
 | `latest` | **稳定版**：同步 OpenClaw 官方发布的**稳定版本**，推荐日常使用。 |
-| `nightly` | **最新版**：每 4 小时同步 OpenClaw 官方的**最新开发代码**，用于尝鲜。 |
 
 ## Docker Compose
 

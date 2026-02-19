@@ -11,7 +11,7 @@
         </div>
         <div class="topbar-status">",
     "<div class="brand-title">OPENCLAW</div>": "<div class="brand-title">OPENCLAW 中文版</div>",
-    "<div class="brand-sub">Gateway Dashboard</div>": "<div class="brand-sub">网关控制台 · 点击访问官网</div>",
+    "<div class="brand-sub">Gateway Dashboard</div>": "<div class="brand-sub">网关控制台</div>",
     "<span>Health</span>": "<span>健康状态</span>",
     "<span class="mono">${state.connected ? "OK" : "Offline"}</span>": "<span class="mono">${state.connected ? "正常" : "离线"}</span>",
     "title="${state.settings.navCollapsed ? "Expand sidebar" : "Collapse sidebar"}"": "title="${state.settings.navCollapsed ? "展开侧栏" : "收起侧栏"}"",
@@ -21,30 +21,19 @@
     "<span class="nav-item__text">Docs</span>": "<span class="nav-item__text">文档</span>",
     ""Disconnected from gateway."": ""已断开网关连接。"",
     "</div>
-        </div>
-      </aside>": "</div>
-            <a
-              class="nav-item nav-item--external"
-              href="https://openclaw.qt.cool"
-              target="_blank"
-              rel="noreferrer"
-              title="汉化官网（新标签页打开）"
-              style="color: #ef4444;"
-            >
-              <span class="nav-item__icon" aria-hidden="true">${icons.globe}</span>
-              <span class="nav-item__text">🇨🇳 汉化官网</span>
-            </a>
-            <a
-              class="nav-item nav-item--external"
-              href="https://github.com/cnrot/OpenClaw-zh"
-              target="_blank"
-              rel="noreferrer"
-              title="GitHub 仓库（新标签页打开）"
-            >
-              <span class="nav-item__icon" aria-hidden="true">${icons.link}</span>
-              <span class="nav-item__text">GitHub</span>
-            </a>
-        </div>
-      </aside>"
+            </div>
+          </aside>": "</div>
+                <a
+                  class="nav-item nav-item--external"
+                  href="https://github.com/cnrot/OpenClaw-zh"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="GitHub 仓库（新标签页打开）"
+                >
+                  <span class="nav-item__icon" aria-hidden="true">${icons.link}</span>
+                  <span class="nav-item__text">GitHub</span>
+                </a>
+            </div>
+          </aside>"
   }
 }

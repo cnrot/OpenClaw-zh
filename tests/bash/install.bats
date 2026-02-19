@@ -27,7 +27,6 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
     run bash "$SCRIPT_PATH" --help
     [ "$status" -eq 0 ]
     [[ "$output" == *"OpenClaw 汉化版安装脚本"* ]]
-    [[ "$output" == *"--nightly"* ]]
 }
 
 @test "-h 显示帮助信息并退出" {
@@ -167,20 +166,6 @@ SCRIPT_PATH="$(cd "$(dirname "$BATS_TEST_FILENAME")/../.." && pwd)/install.sh"
     [[ "$output" == *"@coryrowe/openclaw-zh@latest"* ]]
 }
 
-@test "install_chinese 调用正确的 npm 命令 (nightly)" {
-    npm() {
-        echo "npm $*"
-        return 0
-    }
-    export -f npm
-    
-    source "$SCRIPT_PATH"
-    NPM_TAG="nightly"
-    
-    run install_chinese
-    [ "$status" -eq 0 ]
-    [[ "$output" == *"@coryrowe/openclaw-zh@nightly"* ]]
-}
 
 # ============================================================
 # 卸载原版测试 (使用 mock)

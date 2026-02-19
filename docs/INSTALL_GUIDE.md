@@ -80,8 +80,7 @@ npm -v     # 应显示 10.x.x
 
 | 版本 | 安装命令 | 说明 |
 |------|----------|------|
-| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | **推荐**：同步 OpenClaw 官方**稳定版**，可靠性高。 |
-| **最新版** | `npm install -g @coryrowe/openclaw-zh@nightly` | **尝鲜**：同步 OpenClaw 官方**最新代码**，功能最新。 |
+| **稳定版** | `npm install -g @coryrowe/openclaw-zh@latest` | **推荐**：同步 OpenClaw 官方**稳定版**|
 
 默认推荐安装稳定版：
 ```bash

@@ -2,7 +2,7 @@
  * @Author: cnrot
  * @Date: 2026-02-14 00:53:54
  * @LastEditors: Rowe inetech@zohomail.com
- * @LastEditTime: 2026-02-20 00:46:17
+ * @LastEditTime: 2026-02-20 01:48:26
  * @FilePath: \OpenClaw-zh\CHANGELOG.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,10 +11,9 @@
 ## [2026.2.19-zh.1] - 2026-02-19
 
 ### 🚀 构建流程
-- **稳定版发布自动化**: 重构了稳定版发布工作流 ([`.github/workflows/sync-and-release.yml`](.github/workflows/sync-and-release.yml))，实现了全自动化发布。
+- **稳定版发布优化**: 重构了稳定版发布工作流 ([`.github/workflows/sync-and-release.yml`](.github/workflows/sync-and-release.yml))，实现了全自动化发布。
   - **自动检测**: 工作流现在会每小时自动检测上游 `openclaw/openclaw` 仓库的最新稳定版 `release`。
   - **精确构建**: 构建过程现在基于上游的 `release tag` 进行，确保了汉化版本与上游官方稳定版的一致性，取代了之前基于 `main` 分支最新代码的构建方式。
-  - **兼容并蓄**: 同时保留了原有的 `nightly` 构建流程，用于快速跟进上游的最新开发进展。
 
 ## [2026.2.14-zh.1] - 2026-02-15
 
@@ -63,5 +62,3 @@
 - **仪表盘 (Dashboard)**: 修复了“用量统计” (Usage) 页面翻译丢失/错误的问题，现在可正常显示。
 
 ### 🐳 Docker 镜像
-- Nightly 构建已包含上述所有更新。
-- 推荐使用标签: `coryrowe/openclaw-zh:nightly` (或等待稳定版发布)。

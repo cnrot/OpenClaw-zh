@@ -6,24 +6,17 @@
 #
 # 用法:
 #   irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1 | iex                    # 安装稳定版
-#   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1))) -Nightly  # 安装最新版
 # ============================================================
 
 param(
-    [switch]$Nightly,
     [switch]$Help
 )
 
 $ErrorActionPreference = "Stop"
 
 # 版本设置
-if ($Nightly) {
-    $NpmTag = "nightly"
-    $VersionName = "最新版 (Nightly)"
-} else {
-    $NpmTag = "latest"
-    $VersionName = "稳定版"
-}
+$NpmTag = "latest"
+$VersionName = "稳定版"
 
 # 帮助信息
 if ($Help) {
@@ -31,15 +24,12 @@ if ($Help) {
     Write-Host ""
     Write-Host "用法:"
     Write-Host "  irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1 | iex                              # 安装稳定版"
-    Write-Host "  iex ""& { `$(irm https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.ps1) } -Nightly""          # 安装最新版"
     Write-Host ""
     Write-Host "选项:"
-    Write-Host "  -Nightly            安装最新版（每 4 小时自动构建，追踪上游最新代码）"
     Write-Host "  -Help               显示帮助信息"
     Write-Host ""
     Write-Host "版本说明:"
-    Write-Host "  稳定版 (@latest)   手动发布，经过测试，推荐生产使用"
-    Write-Host "  最新版 (@nightly)  每 4 小时自动构建，追踪上游，适合测试"
+    Write-Host "  稳定版 (@latest)"
     exit 0
 }
 
@@ -49,7 +39,7 @@ function Show-Banner {
     Write-Host "╔═══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "║     🦞 OpenClaw 汉化发行版                                ║" -ForegroundColor Cyan
-    Write-Host "║        开源 AI 智能体                                ║" -ForegroundColor Cyan
+    Write-Host "║        开源 AI 智能体                                      ║" -ForegroundColor Cyan
     Write-Host "║                                                           ║" -ForegroundColor Cyan
     Write-Host "╚═══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
     Write-Host ""
@@ -180,11 +170,6 @@ function Show-Success {
     Write-Host ""
     Write-Host "📦 已安装版本：$VersionName (@$NpmTag)" -ForegroundColor Cyan
     Write-Host ""
-    if ($Nightly) {
-        Write-Host "⚠  提示：您安装的是最新版，追踪上游最新代码，可能不够稳定。" -ForegroundColor Yellow
-        Write-Host "   切换到稳定版：npm install -g @coryrowe/openclaw-zh@latest" -ForegroundColor Yellow
-        Write-Host ""
-    }
     Write-Host "🚀 快速开始：" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "   openclaw onboard          # 启动初始化向导（首次必须运行）"

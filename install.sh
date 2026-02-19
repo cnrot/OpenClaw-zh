@@ -7,7 +7,6 @@
 #
 # 用法:
 #   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash           # 安装稳定版
-#   curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash -s -- --nightly  # 安装最新版
 # ============================================================
 
 set -e
@@ -28,26 +27,17 @@ VERSION_NAME="稳定版"
 # 解析参数
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --nightly)
-            INSTALL_NIGHTLY=true
-            NPM_TAG="nightly"
-            VERSION_NAME="最新版 (Nightly)"
-            shift
-            ;;
         --help|-h)
             echo "OpenClaw 汉化版安装脚本"
             echo ""
             echo "用法:"
             echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash                   # 安装稳定版"
-            echo "  curl -fsSL https://raw.githubusercontent.com/cnrot/OpenClaw-zh/main/install.sh | bash -s -- --nightly   # 安装最新版"
             echo ""
             echo "选项:"
-            echo "  --nightly              安装最新版（每 4 小时自动构建，追踪上游最新代码）"
             echo "  --help                 显示帮助信息"
             echo ""
             echo "版本说明:"
-            echo "  稳定版 (@latest)   手动发布，经过测试，推荐生产使用"
-            echo "  最新版 (@nightly)  每 4 小时自动构建，追踪上游，适合测试"
+            echo "  稳定版 (@latest)"
             echo ""
             exit 0
             ;;
@@ -64,7 +54,7 @@ print_banner() {
     echo "╔═══════════════════════════════════════════════════════════╗"
     echo "║                                                           ║"
     echo "║     🦞 OpenClaw 汉化发行版                                ║"
-    echo "║        开源 AI 智能体                                ║"
+    echo "║        开源 AI 智能体                                      ║"
     echo "║                                                           ║"
     echo "╚═══════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
