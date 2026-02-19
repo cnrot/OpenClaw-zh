@@ -28,6 +28,11 @@ on:
         required: false
         type: string
         default: ''
+      upstream_version_tag:
+        description: '上游 release tag (例如 v0.25.1)'
+        required: false
+        type: string
+        default: ''
     outputs:
       applied:
         description: '应用的翻译规则数'
@@ -94,8 +99,17 @@ jobs:
 
       - name: 克隆上游代码
         run: |
-          git clone --depth 1 https://github.com/${{ env.UPSTREAM_REPO }}.git openclaw
-          cd openclaw
+          # 如果提供了 tag，就克隆指定的 tag
+          if [ -n "${{ inputs.upstream_version_tag }}" ]; then
+            echo "⬇️ 克隆上游指定版本: ${{ inputs.upstream_version_tag }}"
+            git clone --depth 1 --branch ${{ inputs.upstream_version_tag }} https://github.com/${{ env.UPSTREAM_REPO }}.git openclaw
+            cd openclaw
+          else
+            # 否则，保持原有逻辑，克隆最新代码（用于 nightly 构建）
+            echo "⬇️ 克隆上游最新代码 (main 分支)"
+            git clone --depth 1 https://github.com/${{ env.UPSTREAM_REPO }}.git openclaw
+            cd openclaw
+          fi
           COMMIT_SHA=$(git rev-parse --short HEAD)
           echo "✅ 上游代码已克隆 (commit: $COMMIT_SHA)"
 
