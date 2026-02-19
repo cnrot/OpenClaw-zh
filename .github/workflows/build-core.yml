@@ -97,6 +97,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: 验证上游版本标签是否存在
+        if: "inputs.upstream_version_tag != ''"
+        run: |
+          echo "🔎 验证上游版本标签 ${{ inputs.upstream_version_tag }} 是否存在..."
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/git/ref/tags/${{ inputs.upstream_version_tag }}")
+          
+          if [ "$STATUS_CODE" -eq 404 ]; then
+            echo "::error::指定的上游版本标签 '${{ inputs.upstream_version_tag }}' 在仓库 ${{ env.UPSTREAM_REPO }} 中不存在！"
+            exit 1
+          elif [ "$STATUS_CODE" -ne 200 ]; then
+            echo "::warning::验证上游标签时发生未知错误 (HTTP Code: $STATUS_CODE)。将继续尝试克隆。"
+          else
+            echo "✅ 上游版本标签 '${{ inputs.upstream_version_tag }}' 验证通过。"
+          fi
+
       - name: 克隆上游代码
         run: |
           # 如果提供了 tag，就克隆指定的 tag

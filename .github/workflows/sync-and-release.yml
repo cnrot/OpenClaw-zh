@@ -9,10 +9,7 @@
 # 版本说明：
 #   - 稳定版 (@latest)：本工作流发布，自动跟随上游稳定版。
 #   - 最新版 (@nightly)：nightly.yml 发布，每 4 小时自动构建
-#
-# 优化：
-#   - 调用 build-core.yml 复用工作流，减少代码重复
-# ============================================================
+
 
 name: 稳定版发布
 
@@ -22,8 +19,12 @@ on:
     - cron: '15 * * * *'
   workflow_dispatch:
     inputs:
+      upstream_version_tag:
+        description: '指定上游版本标签 (例如 v2026.2.17)，留空则自动获取最新'
+        required: false
+        default: ''
       version:
-        description: '手动指定要发布的汉化版版本号 (例如 0.25.1-zh.2)，如果留空则根据上游版本自动生成。'
+        description: '指定发布版本 (例如 2026.2.17-zh)，留空则自动生成'
         required: false
         default: ''
 
@@ -43,19 +44,28 @@ jobs:
       should_run: ${{ steps.check.outputs.should_run }}
       upstream_tag: ${{ steps.check.outputs.upstream_tag }}
     steps:
-      - name: 获取上游最新 Release Tag
+      - name: 确定上游版本标签
         id: get_upstream_tag
         run: |
-          LATEST_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
-          
-          if [ -z "$LATEST_UPSTREAM_TAG" ] || [ "$LATEST_UPSTREAM_TAG" == "null" ]; then
-            echo "::error::无法获取上游 Release Tag"
+          MANUAL_UPSTREAM_TAG="${{ github.event.inputs.upstream_version_tag }}"
+          FINAL_UPSTREAM_TAG=""
+
+          if [[ -n "$MANUAL_UPSTREAM_TAG" ]]; then
+            echo "💡 手动指定上游版本: $MANUAL_UPSTREAM_TAG"
+            FINAL_UPSTREAM_TAG="$MANUAL_UPSTREAM_TAG"
+          else
+            echo "🔄 自动检测上游最新稳定版..."
+            FINAL_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
+          fi
+
+          if [ -z "$FINAL_UPSTREAM_TAG" ] || [ "$FINAL_UPSTREAM_TAG" == "null" ]; then
+            echo "::error::无法确定上游 Release Tag"
             exit 1
           fi
-          
-          echo "upstream_tag=$LATEST_UPSTREAM_TAG" >> $GITHUB_OUTPUT
-          echo "🔎 上游最新 Tag: $LATEST_UPSTREAM_TAG"
+
+          echo "upstream_tag=$FINAL_UPSTREAM_TAG" >> $GITHUB_OUTPUT
+          echo "🔎 最终确定上游 Tag: $FINAL_UPSTREAM_TAG"
 
       - name: 获取我们最新的 Release Tag
         id: get_our_tag
