@@ -14,7 +14,7 @@
 #   - 调用 build-core.yml 复用工作流，减少代码重复
 # ============================================================
 
-name: 稳定版发布 (自动)
+name: 稳定版发布
 
 on:
   schedule:
@@ -23,7 +23,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: '手动指定上游 OpenClaw 的版本标签 (例如 v0.25.1)，如果留空则自动获取最新稳定版'
+        description: '手动指定要发布的汉化版版本号 (例如 0.25.1-zh.2)，如果留空则根据上游版本自动生成。'
         required: false
         default: ''
 
@@ -43,28 +43,19 @@ jobs:
       should_run: ${{ steps.check.outputs.should_run }}
       upstream_tag: ${{ steps.check.outputs.upstream_tag }}
     steps:
-      - name: 确定上游版本标签
+      - name: 获取上游最新 Release Tag
         id: get_upstream_tag
         run: |
-          MANUAL_VERSION="${{ github.event.inputs.version }}"
-          LATEST_UPSTREAM_TAG=""
-
-          if [[ -n "$MANUAL_VERSION" ]]; then
-            echo "💡 手动指定版本: $MANUAL_VERSION"
-            LATEST_UPSTREAM_TAG="$MANUAL_VERSION"
-          else
-            echo "🔄 自动检测最新稳定版..."
-            LATEST_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
-          fi
-
+          LATEST_UPSTREAM_TAG=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/releases/latest" | jq -r .tag_name)
+          
           if [ -z "$LATEST_UPSTREAM_TAG" ] || [ "$LATEST_UPSTREAM_TAG" == "null" ]; then
             echo "::error::无法获取上游 Release Tag"
             exit 1
           fi
-
+          
           echo "upstream_tag=$LATEST_UPSTREAM_TAG" >> $GITHUB_OUTPUT
-          echo "🔎 最终确定上游 Tag: $LATEST_UPSTREAM_TAG"
+          echo "🔎 上游最新 Tag: $LATEST_UPSTREAM_TAG"
 
       - name: 获取我们最新的 Release Tag
         id: get_our_tag
@@ -111,18 +102,26 @@ jobs:
       upstream_version_tag: ${{ needs.check-upstream.outputs.upstream_tag }}
 
     steps:
-      - name: 生成新的汉化版版本号
+      - name: 确定汉化版版本号
         id: version
         run: |
-          # 上游 tag 格式为 'v0.25.1'
-          UPSTREAM_TAG="${{ needs.check-upstream.outputs.upstream_tag }}"
-          # 去掉 'v' 前缀
-          UPSTREAM_VERSION_NUM="${UPSTREAM_TAG#v}"
-          # 我们的版本号格式为 '0.25.1-zh.1'
-          OUR_NEW_VERSION="${UPSTREAM_VERSION_NUM}-zh.1"
+          MANUAL_VERSION="${{ github.event.inputs.version }}"
+          
+          if [[ -n "$MANUAL_VERSION" ]]; then
+            echo "💡 手动指定发布版本: $MANUAL_VERSION"
+            OUR_NEW_VERSION="$MANUAL_VERSION"
+          else
+            echo "🔄 根据上游版本自动生成版本号..."
+            # 上游 tag 格式为 'v0.25.1'
+            UPSTREAM_TAG="${{ needs.check-upstream.outputs.upstream_tag }}"
+            # 去掉 'v' 前缀
+            UPSTREAM_VERSION_NUM="${UPSTREAM_TAG#v}"
+            # 我们的版本号格式为 '0.25.1-zh.1'
+            OUR_NEW_VERSION="${UPSTREAM_VERSION_NUM}-zh.1"
+          fi
           
           echo "release_version=$OUR_NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "📦 生成新版本号: $OUR_NEW_VERSION"
+          echo "📦 最终确定发布版本号: $OUR_NEW_VERSION"
 
   # ==================== 调用核心构建 ====================
   build:
